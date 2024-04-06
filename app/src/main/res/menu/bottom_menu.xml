@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/bottom_home"
+        android:icon="@drawable/home"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/bottom_list"
+        android:icon="@drawable/list"
+        android:title="@string/list" />
+
+    <item
+        android:id="@+id/bottom_report"
+        android:icon="@drawable/barchart"
+        android:title="@string/report" />
+
+    <item
+        android:id="@+id/bottom_notification"
+        android:icon="@drawable/bell"
+        android:title="@string/notification" />
+
+    <item
+        android:id="@+id/bottom_education"
+        android:icon="@drawable/clapperboard"
+        android:title="@string/user" />
+
+</menu>

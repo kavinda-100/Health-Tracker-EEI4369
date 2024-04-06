@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">HeathTrackerApp</string>
+    <string name="continue_text">Continue</string>
+    <string name="heath_tracker_heading">Heath Tracker</string>
+    <string name="back_text">Back</string>
+    <string name="sign_in_with_us_text">Sign In With Us</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="email_text">Email</string>
+    <string name="don_t_have_an_account_text">don\'t have an account?</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="forgot_password_text">Forgot Password?</string>
+    <string name="reset_text">Reset</string>
+    <string name="password_text">Password</string>
+    <string name="back_button_image_description">Back Button image</string>
+    <string name="all_ready_have_an_account_text">all ready have an account?</string>
+    <string name="sing_up_with_us_text">Sing Up With Us</string>
+    <string name="confirm_password_text">confirm password</string>
+    <string name="user_name_text">user name</string>
+    <string name="reset_heading">Reset</string>
+    <string name="reset_password_text">Reset Password</string>
+    <string name="home">Home</string>
+    <string name="list">List</string>
+    <string name="report">Report</string>
+    <string name="notification">Notification</string>
+    <string name="education">Education</string>
+    <string name="user">User</string>
+</resources>
