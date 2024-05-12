@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +16,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    DataBaseHelper authDataBaseHelper;
+    ShowMessage showMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +28,56 @@ public class SignUpActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // create database
+        authDataBaseHelper = new DataBaseHelper(this);
+        // create show message object
+        showMessage = new ShowMessage();
+        // call the methods
         signUp();
         backToWelcomeFromSingUp();
         backToSignInFromSingUp();
     }
+
+    public void signUp(){
+        Button signUpButton = findViewById(R.id.sign_up_button);
+        EditText username = findViewById(R.id.sign_up_user_name);
+        EditText email = findViewById(R.id.sign_up_email);
+        EditText password = findViewById(R.id.sign_up_password);
+        EditText confirmPassword = findViewById(R.id.sign_up_Confirm_password);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // check if the username, email, password and confirm password are empty
+                if (username.getText().toString().isEmpty() || email.getText().toString().isEmpty() || password.getText().toString().isEmpty() || confirmPassword.getText().toString().isEmpty()) {
+                    // show toast message
+                    //Toast.makeText(SignUpActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                    showMessage.show("Error", "Please fill all the fields", SignUpActivity.this);
+                    return;
+                }
+                // check if the password and confirm password are not the same
+                if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
+                    // show toast message
+                    //Toast.makeText(SignUpActivity.this, "Password and Confirm Password are not the same", Toast.LENGTH_SHORT).show();
+                    showMessage.show("Error", "Password and Confirm Password are not the same", SignUpActivity.this);
+                    return;
+                }
+                // sign up
+                boolean isSignedUp = authDataBaseHelper.signUp(username.getText().toString(), email.getText().toString(), password.getText().toString());
+                if (isSignedUp) {
+                    // show toast message
+                    Toast.makeText(SignUpActivity.this, "Signed Up", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    // show toast message
+                    //Toast.makeText(SignUpActivity.this, "Not Signed Up", Toast.LENGTH_SHORT).show();
+                    showMessage.show("Error", "Not Signed Up", SignUpActivity.this);
+                }
+            }
+        });
+    }
+
+
 
     private void backToSignInFromSingUp() {
         TextView backToSignInButton = findViewById(R.id.textSignUp);
@@ -36,16 +85,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-    public void signUp(){
-        Button signUpButton = findViewById(R.id.sign_up_button);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -60,5 +99,5 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
 }
+

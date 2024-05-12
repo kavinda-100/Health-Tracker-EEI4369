@@ -57,7 +57,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/reset_user_name"
+            android:id="@+id/sign_in_email"
             android:layout_below="@+id/Sign_in_heading"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -71,8 +71,8 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/reset_password"
-            android:layout_below="@+id/reset_user_name"
+            android:id="@+id/sign_in_password"
+            android:layout_below="@+id/sign_in_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="10dp"
@@ -86,7 +86,7 @@
 
         <LinearLayout
             android:id="@+id/qaAndSigUpQA"
-            android:layout_below="@+id/reset_password"
+            android:layout_below="@+id/sign_in_password"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
