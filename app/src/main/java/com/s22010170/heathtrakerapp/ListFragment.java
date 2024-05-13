@@ -7,13 +7,26 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ListFragment extends Fragment {
-
+    TextView email, heading;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_list, container, false);
+
+        email = rootView.findViewById(R.id.show_list_email);
+        heading = rootView.findViewById(R.id.list_heading);
+
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            String emailText = bundle.getString("email");
+            heading.setText(emailText);
+        }
+
+
+        return rootView;
     }
 }

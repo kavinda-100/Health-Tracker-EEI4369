@@ -54,6 +54,13 @@ public class SignInActivity extends AppCompatActivity {
                     showMessage.show("Error", "Please fill all the fields", SignInActivity.this);
                     return;
                 }
+                // check if the password length is less than 6
+                if (password.getText().toString().length() < 6) {
+                    // show toast message
+                    //Toast.makeText(SignUpActivity.this, "Password length should be greater than 6", Toast.LENGTH_SHORT).show();
+                    showMessage.show("Error", "Password length should be greater than 6", SignInActivity.this);
+                    return;
+                }
                 // sign in
                 Cursor cursor = authDataBaseHelper.signIn(email.getText().toString(), password.getText().toString());
                 // check if the cursor is empty
@@ -63,6 +70,8 @@ public class SignInActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(SignInActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                    // pass email to the home fragment
+                    intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 }
 

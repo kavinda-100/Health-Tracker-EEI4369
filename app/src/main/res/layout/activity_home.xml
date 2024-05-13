@@ -24,6 +24,7 @@
         app:itemRippleColor="@android:color/transparent"
         app:itemIconSize="30dp"
         app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/lite_text_color"
         android:background="@drawable/menu_background"
         app:itemIconTint="@drawable/menu_item_selector"
         app:menu="@menu/bottom_menu"

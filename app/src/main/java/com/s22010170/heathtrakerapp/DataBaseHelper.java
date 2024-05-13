@@ -79,4 +79,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + AUTH_TABLE_NAME + " WHERE EMAIL = '" + email + "'", null);
     }
+
+    // get all users
+    public Cursor getAllUsers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + AUTH_TABLE_NAME, null);
+    }
 }

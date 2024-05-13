@@ -54,6 +54,14 @@ public class SignUpActivity extends AppCompatActivity {
                     showMessage.show("Error", "Please fill all the fields", SignUpActivity.this);
                     return;
                 }
+                // check if the password length is less than 6
+                if (password.getText().toString().length() < 6) {
+                    // show toast message
+                    //Toast.makeText(SignUpActivity.this, "Password length should be greater than 6", Toast.LENGTH_SHORT).show();
+                    showMessage.show("Error", "Password length should be greater than 6", SignUpActivity.this);
+                    return;
+                }
+
                 // check if the password and confirm password are not the same
                 if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
                     // show toast message
@@ -67,6 +75,8 @@ public class SignUpActivity extends AppCompatActivity {
                     // show toast message
                     Toast.makeText(SignUpActivity.this, "Signed Up", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                    // pass email to the home fragment
+                    intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 } else {
                     // show toast message
