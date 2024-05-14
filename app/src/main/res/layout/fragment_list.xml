@@ -3,42 +3,214 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
     tools:context=".ListFragment">
 
     <TextView
-        android:id="@+id/list_heading"
-        android:layout_width="match_parent"
+        android:id="@+id/list_heading_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list"
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:text="@string/medication_list_heding"
+        android:textColor="@color/black"
         android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         />
 
     <LinearLayout
-        android:id="@+id/list_email_content"
-        android:layout_below="@+id/list_heading"
+        android:id="@+id/search_view_container"
+        android:layout_below="@+id/list_heading_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="20dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/email_text"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/show_list_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="10dp"
-            />
+        android:background="@color/background"
+        android:orientation="horizontal">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:queryHint="@string/search_for_medication"
+            android:background="@drawable/input_background"
+            android:autofillHints="text"
+            android:inputType="text"
+            android:iconifiedByDefault="false"
+            android:layout_weight="1"/>
+
     </LinearLayout>
+
+    <ScrollView
+        android:layout_below="@+id/search_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/input_background">
+
+                <!-- medication name-->
+                <LinearLayout
+                    android:id="@+id/medication_name_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medication Name: "
+                        android:textStyle="bold"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Acetaertion"
+                        android:textStyle="bold"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        android:textColor="@color/lite_text_color"
+                        android:layout_marginStart="10dp"
+                        />
+                </LinearLayout>
+                <!-- dosage-->
+                <LinearLayout
+                    android:layout_below="@+id/medication_name_area"
+                    android:id="@+id/medication_dosage_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dosage: "
+                        android:textStyle="bold"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textStyle="bold"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        android:textColor="@color/lite_text_color"
+                        android:layout_marginStart="10dp"
+                        />
+                </LinearLayout>
+                <!-- time and date-->
+                <LinearLayout
+                    android:id="@+id/medication_time_date_area"
+                    android:layout_below="@+id/medication_dosage_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <!-- time-->
+                    <LinearLayout
+                        android:id="@+id/medication_time_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Time: "
+                            android:textStyle="bold"
+                            android:textAlignment="textStart"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="11.00.a.m"
+                            android:textStyle="bold"
+                            android:textAlignment="textStart"
+                            android:textSize="16sp"
+                            android:textColor="@color/lite_text_color"
+                            android:layout_marginStart="10dp"
+                            />
+                    </LinearLayout>
+                    <!-- date-->
+                    <LinearLayout
+                        android:id="@+id/medication_date_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date: "
+                            android:textStyle="bold"
+                            android:textAlignment="textStart"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="11.00.a.m"
+                            android:textStyle="bold"
+                            android:textAlignment="textStart"
+                            android:textSize="16sp"
+                            android:textColor="@color/lite_text_color"
+                            android:layout_marginStart="10dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- see more button-->
+                <TextView
+                    android:layout_below="@+id/medication_time_date_area"
+                    android:id="@+id/see_more_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/see_details_text"
+                    android:textColor="@color/lite_text_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="20dp"
+                    />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_list_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/primary"
+        android:contentDescription="@string/add_medication"
+        app:srcCompat="@drawable/baseline_add_24"
+        app:tint="@color/black"
+        app:fabSize="auto"
+        app:fabCustomSize="70dp"
+        app:elevation="6dp"/>
+
 
 </RelativeLayout>

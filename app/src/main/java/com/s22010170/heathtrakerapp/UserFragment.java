@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 public class UserFragment extends Fragment {
     DataBaseHelper authDataBaseHelper;
     ShowMessage showMessage;
@@ -106,16 +108,19 @@ public class UserFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // show confirm dialog
                 // delete the user account
                 boolean isDeleted = authDataBaseHelper.deleteAccount(globalVariableEmail);
                 if(isDeleted){
                     showMessage.show("Success", "User account deleted successfully.", getActivity());
                     ((MyApplication) requireActivity().getApplication()).clearGlobalVariableEmail();
+                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableName();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }else{
                     showMessage.show("Error", "Unable to delete the user account.", getActivity());
                 }
+
             }
         });
 
@@ -123,11 +128,14 @@ public class UserFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // show confirm dialog
+
                 // update the login status
                 boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(globalVariableEmail, "false");
                 if(isUpdateLoginStatus){
                     showMessage.show("Success", "User logged out successfully.", getActivity());
                     ((MyApplication) requireActivity().getApplication()).clearGlobalVariableEmail();
+                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableName();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }else{

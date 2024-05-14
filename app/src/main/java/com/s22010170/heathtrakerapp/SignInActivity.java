@@ -75,7 +75,10 @@ public class SignInActivity extends AppCompatActivity {
                         return;
                     }
                     MyApplication myApplication = (MyApplication)getApplication();
-                    myApplication.setGlobalVariableEmail(email.getText().toString());
+                    while (cursor.moveToNext()){
+                        myApplication.setGlobalVariableEmail(cursor.getString(2));
+                        myApplication.setGlobalVariableName(cursor.getString(1));
+                    }
                     Toast.makeText(SignInActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
                     // pass email to the home fragment

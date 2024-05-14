@@ -32,4 +32,11 @@
     <string name="cancel_text">Cancel</string>
     <string name="delete_account_text">Delete Account</string>
     <string name="logout_text">logout</string>
+    <string name="profile_heding">Profile</string>
+    <string name="medication_list_heding">Medication List</string>
+    <string name="search_for_medication">search for medication</string>
+    <string name="see_details_text">see details</string>
+    <string name="upcomming_medication_remainders">Upcomming Medication Remainders</string>
+    <string name="summary">Summary</string>
+    <string name="add_medication">add</string>
 </resources>
