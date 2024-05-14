@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ListFragment extends Fragment {
-    TextView email, heading;
+    TextView email;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -18,12 +18,11 @@ public class ListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_list, container, false);
 
         email = rootView.findViewById(R.id.show_list_email);
-        heading = rootView.findViewById(R.id.list_heading);
 
-        Bundle bundle = getArguments();
+        Bundle bundle = this.getArguments();
         if(bundle != null){
             String emailText = bundle.getString("email");
-            heading.setText(emailText);
+            email.setText(emailText);
         }
 
 

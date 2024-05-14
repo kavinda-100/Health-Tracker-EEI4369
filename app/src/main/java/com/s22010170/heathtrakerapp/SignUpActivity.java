@@ -1,6 +1,7 @@
 package com.s22010170.heathtrakerapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -72,6 +73,11 @@ public class SignUpActivity extends AppCompatActivity {
                 // sign up
                 boolean isSignedUp = authDataBaseHelper.signUp(username.getText().toString(), email.getText().toString(), password.getText().toString());
                 if (isSignedUp) {
+                    boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(email.getText().toString(), "true");
+                    if (!isUpdateLoginStatus) {
+                        showMessage.show("Error", "Unable to update login status", SignUpActivity.this);
+                        return;
+                    }
                     // show toast message
                     Toast.makeText(SignUpActivity.this, "Signed Up", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
@@ -79,8 +85,6 @@ public class SignUpActivity extends AppCompatActivity {
                     intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 } else {
-                    // show toast message
-                    //Toast.makeText(SignUpActivity.this, "Not Signed Up", Toast.LENGTH_SHORT).show();
                     showMessage.show("Error", "Not Signed Up", SignUpActivity.this);
                 }
             }

@@ -1,6 +1,7 @@
 package com.s22010170.heathtrakerapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         authDataBaseHelper = new DataBaseHelper(this);
         // create show message object
         showMessage = new ShowMessage();
+
         signIn();
         reset();
         backToWelcomeFromSignIn();
@@ -68,6 +70,11 @@ public class SignInActivity extends AppCompatActivity {
                     showMessage.show("Error", "Invalid Credentials", SignInActivity.this);
                     return;
                 }else {
+                    boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(email.getText().toString(), "true");
+                    if (!isUpdateLoginStatus) {
+                        showMessage.show("Error", "Unable to update login status", SignInActivity.this);
+                        return;
+                    }
                     Toast.makeText(SignInActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
                     // pass email to the home fragment
