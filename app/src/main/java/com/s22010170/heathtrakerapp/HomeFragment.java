@@ -19,8 +19,6 @@ public class HomeFragment extends Fragment {
     ShowMessage showMessage;
     TextView email, username;
 
-    Button goToListButton, logOutButton;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,8 +27,6 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         email = rootView.findViewById(R.id.show_email);
         username = rootView.findViewById(R.id.show_username);
-        goToListButton = rootView.findViewById(R.id.go_to_list_button);
-        logOutButton = rootView.findViewById(R.id.log_out_button);
 
         // TODO: create database
         authDataBaseHelper = new DataBaseHelper(getActivity());

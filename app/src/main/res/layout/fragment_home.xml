@@ -68,28 +68,4 @@
             />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/go_to_list_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/email_content"
-        android:text="@string/list"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:background="@drawable/button_background_primary"
-        android:layout_margin="20dp"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/log_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/go_to_list_button"
-        android:text="log out"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:background="@drawable/button_background_primary"
-        android:layout_margin="20dp"
-        />
-
 </RelativeLayout>

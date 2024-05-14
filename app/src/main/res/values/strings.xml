@@ -26,4 +26,10 @@
     <string name="user">User</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_image_background_description">user image background</string>
+    <string name="welcome_greet">Welcome</string>
+    <string name="update_text">Update</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="delete_account_text">Delete Account</string>
+    <string name="logout_text">logout</string>
 </resources>
