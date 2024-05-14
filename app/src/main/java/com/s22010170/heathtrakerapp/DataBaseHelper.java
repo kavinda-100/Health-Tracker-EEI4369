@@ -94,7 +94,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE EMAIL = '" + email + "'", null);
     }
     // update user data
-    public boolean updateUserData(String email, String username, String imgURL, String password) {
+    public boolean updateUserData(String oldEmail, String email, String username, String password, String imgURL) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(user_COL_2, username);
@@ -103,7 +103,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(user_COL_5, imgURL);
         contentValues.put(user_COL_6, "true");
 
-        long result = db.update(USER_TABLE_NAME, contentValues, "EMAIL = ?", new String[]{email});
+        long result = db.update(USER_TABLE_NAME, contentValues, "EMAIL = ?", new String[]{oldEmail});
 
         return result != -1;
     }

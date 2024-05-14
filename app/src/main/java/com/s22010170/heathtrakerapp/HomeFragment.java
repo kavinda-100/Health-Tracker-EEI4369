@@ -47,10 +47,6 @@ public class HomeFragment extends Fragment {
                     username.setText(cursor.getString(1));
                     email.setText(cursor.getString(2));
                     String isLoggedIn = cursor.getString(5);
-                    //TODO: check if the user is logged in
-                    if(isLoggedIn.equals("true")){
-                        showMessage.show("success", "User is logged in. value is: " + isLoggedIn, getActivity());
-                    }
                 }
             }else{
                 showMessage.show("Error", "Unable to get the data from database.", getActivity());
