@@ -32,51 +32,37 @@ public class HomeFragment extends Fragment {
         goToListButton = rootView.findViewById(R.id.go_to_list_button);
         logOutButton = rootView.findViewById(R.id.log_out_button);
 
-        // create database
+        // TODO: create database
         authDataBaseHelper = new DataBaseHelper(getActivity());
-        // create show message object
+
+        // TODO: create show message object
         showMessage = new ShowMessage();
 
-        Intent intent = getActivity().getIntent();
-        // check if the intent is not null
-        if(intent != null){
-            String emailText = intent.getStringExtra("email");
-            // get the data from the database
-            Cursor cursor = authDataBaseHelper.getUserData(emailText);
+        // TODO: get the global variable
+        String globalVariableEmail = ((MyApplication) requireActivity().getApplication()).getGlobalVariableEmail();
+
+        // TODO: get the data from the database and display it on the screen
+        if(!globalVariableEmail.isEmpty()){
+            // TODO: get the data from the database
+            Cursor cursor = authDataBaseHelper.getUserData(globalVariableEmail);
             if(cursor.getCount() != 0){
-                //showMessage.show("success", "able to get the data from database.", getActivity());
+                //TODO: display the data on the screen
                 while (cursor.moveToNext()) {
                     username.setText(cursor.getString(1));
                     email.setText(cursor.getString(2));
                     String isLoggedIn = cursor.getString(5);
+                    //TODO: check if the user is logged in
                     if(isLoggedIn.equals("true")){
-                        showMessage.show("success", "User is logged in." + isLoggedIn, getActivity());
+                        showMessage.show("success", "User is logged in. value is: " + isLoggedIn, getActivity());
                     }
                 }
             }else{
                 showMessage.show("Error", "Unable to get the data from database.", getActivity());
             }
         }
-
-        goToListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("email", email.getText().toString());
-                ListFragment listFragment = new ListFragment();
-                listFragment.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.home_container, listFragment).commit();
-            }
-        });
-
-        logOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        else {
+            showMessage.show("Error", "Global Variable Email is empty.", getActivity());
+        }
 
 
         return rootView;

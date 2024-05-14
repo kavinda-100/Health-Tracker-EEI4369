@@ -78,6 +78,8 @@ public class SignUpActivity extends AppCompatActivity {
                         showMessage.show("Error", "Unable to update login status", SignUpActivity.this);
                         return;
                     }
+                    MyApplication myApplication = (MyApplication)getApplication();
+                    myApplication.setGlobalVariableEmail(email.getText().toString());
                     // show toast message
                     Toast.makeText(SignUpActivity.this, "Signed Up", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);

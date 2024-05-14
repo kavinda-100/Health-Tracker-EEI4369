@@ -19,11 +19,9 @@ public class ListFragment extends Fragment {
 
         email = rootView.findViewById(R.id.show_list_email);
 
-        Bundle bundle = this.getArguments();
-        if(bundle != null){
-            String emailText = bundle.getString("email");
-            email.setText(emailText);
-        }
+        // TODO: get the global variable
+        String globalVariableEmail = ((MyApplication) requireActivity().getApplication()).getGlobalVariableEmail();
+        email.setText(globalVariableEmail);
 
 
         return rootView;
