@@ -39,4 +39,6 @@
     <string name="upcomming_medication_remainders">Upcomming Medication Remainders</string>
     <string name="summary">Summary</string>
     <string name="add_medication">add</string>
+    <string name="divider">divider</string>
+    <string name="resent_notification">Resent Notification</string>
 </resources>
