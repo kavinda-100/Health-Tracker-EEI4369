@@ -176,13 +176,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/white"
         android:contentDescription="@string/add_medication"
         app:elevation="6dp"
         app:fabCustomSize="70dp"
         app:fabSize="auto"
         app:srcCompat="@drawable/baseline_video_library_24"
-        app:tint="@color/black"/>
+        app:tint="@color/primary"/>
 
 
 </RelativeLayout>

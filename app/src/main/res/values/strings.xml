@@ -43,4 +43,14 @@
     <string name="resent_notification">Resent Notification</string>
     <string name="educational_resources_heading">Educational Resources</string>
     <string name="reports_heading">Reports</string>
+    <string name="about_medication_heading">About Medication</string>
+    <string name="name_of_medicine">Name of medicine:</string>
+    <string name="paracetamol">Paracetamol</string>
+    <string name="description">Description:</string>
+    <string name="paracetamol_description">decription of the medicine\n</string>
+    <string name="dosage">Dosage:</string>
+    <string name="paracetamol_dosage">2</string>
+    <string name="paracetamol_image">paracetamol_image</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

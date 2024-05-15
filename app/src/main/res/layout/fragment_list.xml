@@ -21,29 +21,63 @@
         android:layout_marginBottom="10dp"
         />
 
-<!--    search bar-->
+    <!--    search area-->
     <LinearLayout
-        android:id="@+id/search_view_container_list"
         android:layout_below="@+id/list_heading_text"
+        android:id="@+id/search_view_container_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:background="@color/background"
+        android:paddingVertical="4dp"
+        android:background="@drawable/input_background"
         android:orientation="horizontal">
-
-        <SearchView
-            android:id="@+id/search_view_list"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:queryHint="@string/search_for_medication"
+        <!--    search box-->
+        <EditText
+            android:id="@+id/list_medication_search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_for_medication"
             android:background="@drawable/input_background"
+            android:padding="10dp"
             android:autofillHints="text"
-            android:inputType="text"
-            android:iconifiedByDefault="false"
-            android:layout_weight="1"/>
-
+            android:textColorHint="@color/lite_text_color"
+            android:textColor="@color/black"
+            android:inputType="textAutoComplete" />
+        <!--search icon-->
+        <ImageView
+            android:id="@+id/list_medication_search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/search_for_medication"
+            android:src="@drawable/baseline_search_24"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="-30dp"
+            />
     </LinearLayout>
+
+<!--&lt;!&ndash;    search bar&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/search_view_container_list"-->
+<!--        android:layout_below="@+id/list_heading_text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:background="@color/background"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <SearchView-->
+<!--            android:id="@+id/search_view_list"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:queryHint="@string/search_for_medication"-->
+<!--            android:background="@drawable/input_background"-->
+<!--            android:autofillHints="text"-->
+<!--            android:inputType="text"-->
+<!--            android:iconifiedByDefault="false"-->
+<!--            android:layout_weight="1"/>-->
+
+<!--    </LinearLayout>-->
 
 <!--medication list-->
     <ScrollView
@@ -214,7 +248,7 @@
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary"
         android:contentDescription="@string/add_medication"
-        app:srcCompat="@drawable/baseline_add_24"
+        app:srcCompat="@drawable/baseline_create_24"
         app:tint="@color/black"
         app:fabSize="auto"
         app:fabCustomSize="70dp"
