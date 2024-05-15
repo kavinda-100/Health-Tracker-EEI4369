@@ -56,4 +56,9 @@
     <string name="delete">Delete</string>
     <string name="add_medication_heading">Add Medication</string>
     <string name="edit_medication_text">Edit Medication</string>
+    <string name="map_image">map image</string>
+    <string name="display_track_on_google_map">Find Your Nearest Medical Center</string>
+    <string name="enter_your_starting_point">Origin</string>
+    <string name="enter_your_destination">Destination</string>
+    <string name="get_direction">Get Direction</string>
 </resources>
