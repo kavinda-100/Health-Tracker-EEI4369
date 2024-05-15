@@ -118,11 +118,23 @@
         android:textStyle="bold" />
 
 <!--    picture of the medicine-->
+    <TextView
+        android:id="@+id/about_medication_image_sub"
+        android:layout_below="@+id/about_medication_dosage_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/image"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        />
     <ImageView
         android:id="@+id/about_medication_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_below="@+id/about_medication_dosage_value"
+        android:layout_below="@+id/about_medication_image_sub"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp"
         android:src="@drawable/tablet"

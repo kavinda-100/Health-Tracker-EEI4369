@@ -61,4 +61,15 @@
     <string name="enter_your_starting_point">Origin</string>
     <string name="enter_your_destination">Destination</string>
     <string name="get_direction">Get Direction</string>
+    <string name="image">Picture:</string>
+    <string name="medication_name_hint">Medication Name</string>
+    <string name="medication_description_hint">Description</string>
+    <string name="medication_dosage_hint">Dosage</string>
+    <string name="add_picture">Add Picture</string>
+    <string name="set_a_audio_remainder">Set a audio remainder</string>
+    <string name="or">or</string>
+    <string name="set_a_notification_remainder">set a notification remainder</string>
+    <string name="frequency">Frequency</string>
+    <string name="_00">00</string>
+    <string name="add">Add</string>
 </resources>
