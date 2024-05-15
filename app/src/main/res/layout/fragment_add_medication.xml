@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".AddMedicationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--    heading area-->
+    <LinearLayout
+        android:id="@+id/add_medication_heading_area"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables,UselessParent">
+        <!--back icon-->
+        <ImageView
+            android:id="@+id/add_medication_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back_text"
+            android:src="@drawable/baseline_keyboard_backspace_24"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            />
+        <!--    heading-->
+        <TextView
+            android:id="@+id/add_medication_heading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_medication_heading"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="75dp"
+            />
 
-</FrameLayout>
+    </LinearLayout>
+
+</RelativeLayout>

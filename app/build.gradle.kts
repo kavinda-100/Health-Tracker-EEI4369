@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.androidApplication)
 }
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.s22010170.heathtrakerapp"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -44,4 +46,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.maps.android:android-maps-utils:3.8.0")
 }

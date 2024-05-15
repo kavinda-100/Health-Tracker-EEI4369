@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">HeathTrackerApp</string>
+    <string name="my_api_key">AIzaSyApDBHYO8X4x6wHje9G8dEiZu37ZR1eQ5g</string>
     <string name="continue_text">Continue</string>
     <string name="heath_tracker_heading">Heath Tracker</string>
     <string name="back_text">Back</string>
@@ -53,4 +54,6 @@
     <string name="paracetamol_image">paracetamol_image</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="add_medication_heading">Add Medication</string>
+    <string name="edit_medication_text">Edit Medication</string>
 </resources>

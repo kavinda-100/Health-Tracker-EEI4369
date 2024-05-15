@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
@@ -20,6 +21,7 @@ public class HomeFragment extends Fragment {
     ShowMessage showMessage;
 
     TextView greeting;
+    RelativeLayout medicationListItem;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         // TODO:define variables
         greeting = rootView.findViewById(R.id.greet_user_text);
+        medicationListItem = rootView.findViewById(R.id.medication_list_item_home);
         // TODO: create database
         authDataBaseHelper = new DataBaseHelper(getActivity());
         // TODO: create show message object
@@ -39,6 +42,19 @@ public class HomeFragment extends Fragment {
         if(globalVariableName != null) {
             greeting.setText("Hello, " + globalVariableName);
         }
+
+        // navigate to the medication details/about fragment
+        medicationListItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AboutMedicationFragment aboutMedicationFragment = new AboutMedicationFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.home_container, aboutMedicationFragment)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("fromHomeFragment")
+                        .commit();
+            }
+        });
 
         return rootView;
     }
