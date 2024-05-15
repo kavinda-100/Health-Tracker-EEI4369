@@ -41,4 +41,6 @@
     <string name="add_medication">add</string>
     <string name="divider">divider</string>
     <string name="resent_notification">Resent Notification</string>
+    <string name="educational_resources_heading">Educational Resources</string>
+    <string name="reports_heading">Reports</string>
 </resources>
