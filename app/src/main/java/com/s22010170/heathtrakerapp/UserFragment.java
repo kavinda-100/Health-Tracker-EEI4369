@@ -28,6 +28,8 @@ public class UserFragment extends Fragment {
     ImageView profileImage, backgroundImage;
     TextView greetingText, emailText;
     String oldPassword, newPassword;
+    byte[] imgAvatar;
+    byte[] imgBackground;
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +55,7 @@ public class UserFragment extends Fragment {
         greetingText = rootView.findViewById(R.id.user_greet_text);
         emailText = rootView.findViewById(R.id.user_email_text);
 
+
         // get the global variable
         String globalVariableEmail = ((MyApplication) requireActivity().getApplication()).getGlobalVariableEmail();
 
@@ -65,13 +68,17 @@ public class UserFragment extends Fragment {
                 while (cursor.moveToNext()) {
                     username.setText(cursor.getString(1));
                     email.setText(cursor.getString(2));
-                    //password.setText(cursor.getString(3));
                     oldPassword = cursor.getString(3);
-                    profileImage.setImageURI(Uri.parse(cursor.getString(4)));
-                    backgroundImage.setImageURI(Uri.parse(cursor.getString(4)));
+                    imgAvatar = cursor.getBlob(4);
+                    imgBackground = cursor.getBlob(5);
                     greetingText.setText("Hello, " + cursor.getString(1));
                     emailText.setText(cursor.getString(2));
                 }
+                if(imgAvatar != null && imgBackground != null){
+                    profileImage.setImageBitmap(DbBitmapUtility.getImage(imgAvatar));
+                    backgroundImage.setImageBitmap(DbBitmapUtility.getImage(imgBackground));
+                }
+
             }else{
                 showMessage.show("Error", "Unable to get the data from database.", getActivity());
             }
@@ -87,16 +94,18 @@ public class UserFragment extends Fragment {
                 // if password not provided then use the old password
                 if(password.getText().toString().isEmpty() && confirmPassword.getText().toString().isEmpty()) {
                     newPassword = oldPassword;
-                    updateUserData(globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, String.valueOf(profileImage));
+                    updateUserData(globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, null, null);
                     ((MyApplication) requireActivity().getApplication()).setGlobalVariableEmail(email.getText().toString());
+                    ((MyApplication) requireActivity().getApplication()).setGlobalVariableName(username.getText().toString());
                 }
                 else{
                     // if password provided then use the new password
                     newPassword = password.getText().toString();
                     // check if the password is correct and password and confirm password are same
                     if(newPassword.equals(confirmPassword.getText().toString()) && newPassword.length() < 6){
-                        updateUserData(globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, String.valueOf(profileImage));
+                        updateUserData(globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, null, null);
                         ((MyApplication) requireActivity().getApplication()).setGlobalVariableEmail(email.getText().toString());
+                        ((MyApplication) requireActivity().getApplication()).setGlobalVariableName(username.getText().toString());
                     }else{
                         showMessage.show("Error", "Password and confirm password should be same and password should be at least 6 characters long.", getActivity());
                     }
@@ -165,9 +174,9 @@ public class UserFragment extends Fragment {
         return rootView;
     }
     // TODO:update user data method
-    public void updateUserData(String oldEmail, String email, String username, String password, String imgURL){
+    public void updateUserData(String oldEmail, String email, String username, String password, byte[] imgAvatar, byte[] imgBackground){
         // update the user data
-        boolean isUpdated = authDataBaseHelper.updateUserData(oldEmail, email, username, password, imgURL);
+        boolean isUpdated = authDataBaseHelper.updateUserData(oldEmail, email, username, password, imgAvatar, imgBackground);
         if(isUpdated){
             showMessage.show("Success", "User data updated successfully.", getActivity());
         }else{

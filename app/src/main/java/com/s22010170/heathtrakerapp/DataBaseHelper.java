@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Blob;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
     // database name and version
     public static final String DATABASE_NAME = "HeathTracker.db";
@@ -19,8 +21,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String user_COL_2 = "username";
     public static final String user_COL_3 = "email";
     public static final String user_COL_4 = "password";
-    public static final String user_COL_5 = "imgURL";
-    public static final String user_COL_6 = "isLoggedIn";
+    public static final String user_COL_5 = "imgAvatar";
+    public static final String user_COL_6 = "imgBackground";
+    public static final String user_COL_7 = "isLoggedIn";
     public DataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // crate database and table
@@ -30,7 +33,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create user table
-        db.execSQL("CREATE TABLE " + USER_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT, IMGURL TEXT, ISLOGGEDIN TEXT DEFAULT 'false')");
+        db.execSQL("CREATE TABLE " + USER_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT, IMGAVATAR BLOB, IMGBACKGROUND BLOB, ISLOGGEDIN TEXT DEFAULT 'false')");
 
     }
 
@@ -49,8 +52,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(user_COL_2, username);
         contentValues.put(user_COL_3, email);
         contentValues.put(user_COL_4, password);
-        contentValues.put(user_COL_5, "https://picsum.photos/seed/picsum/200/300");
-        contentValues.put(user_COL_6, "true");
+        contentValues.put(user_COL_7, "true");
 
         long result = db.insert(USER_TABLE_NAME, null, contentValues);
 
@@ -65,7 +67,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean updateLoginStatus(String email, String status) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(user_COL_6, status);
+        contentValues.put(user_COL_7, status);
 
         long result = db.update(USER_TABLE_NAME, contentValues, "EMAIL = ?", new String[]{email});
 
@@ -94,14 +96,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE EMAIL = '" + email + "'", null);
     }
     // update user data
-    public boolean updateUserData(String oldEmail, String email, String username, String password, String imgURL) {
+    public boolean updateUserData(String oldEmail, String email, String username, String password, byte[] imgAvatar, byte[] imgBackground) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(user_COL_2, username);
         contentValues.put(user_COL_3, email);
         contentValues.put(user_COL_4, password);
-        contentValues.put(user_COL_5, imgURL);
-        contentValues.put(user_COL_6, "true");
+        contentValues.put(user_COL_5, imgAvatar);
+        contentValues.put(user_COL_6, imgBackground);
+        contentValues.put(user_COL_7, "true");
 
         long result = db.update(USER_TABLE_NAME, contentValues, "EMAIL = ?", new String[]{oldEmail});
 

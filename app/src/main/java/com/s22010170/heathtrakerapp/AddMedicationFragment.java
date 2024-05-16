@@ -37,7 +37,7 @@ public class AddMedicationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // go back to medication list
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new ListFragment()).commit();
             }
         });
 
