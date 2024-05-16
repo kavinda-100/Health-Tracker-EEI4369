@@ -1,9 +1,13 @@
 package com.s22010170.heathtrakerapp;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.core.app.ActivityCompat;
 
 public class Tempo {
 
@@ -46,5 +50,21 @@ public class Tempo {
 //        if(bundle != null){
 //        String emailText = bundle.getString("email");
 //        email.setText(emailText);
+//    }
+
+//    TODO:picture from gallery
+//Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//    startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
+
+    //TODO: for permission  to access the gallery (bit work not completely done)
+//    // check the run time permission
+//                if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
+//        // permission already granted
+////                    showMessage.show("Success", "Permission already granted", MainActivity.this);
+//        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+//        startActivity(intent);
+//    } else {
+//        // permission not granted, request for permission
+//        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_MEDIA_IMAGES}, PERMISSION_CODE);
 //    }
 }
