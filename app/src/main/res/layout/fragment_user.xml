@@ -163,8 +163,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/update_text"
                         android:textAllCaps="false"
-                        android:paddingVertical="10dp"
-                        android:paddingHorizontal="25dp"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="10dp"
                         android:textColor="@color/black"
                         android:background="@drawable/button_background_primary"/>
 
@@ -174,8 +174,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/logout_text"
                         android:textAllCaps="false"
-                        android:paddingVertical="10dp"
-                        android:paddingHorizontal="25dp"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="10dp"
                         android:layout_marginStart="30dp"
                         android:textColor="@color/black"
                         android:background="@drawable/button_background_secondary"/>
@@ -196,8 +196,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/delete_account_text"
                         android:textAllCaps="false"
-                        android:paddingVertical="10dp"
-                        android:paddingHorizontal="25dp"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="10dp"
                         android:textColor="@color/white"
                         android:background="@drawable/button_background_worning"/>
 

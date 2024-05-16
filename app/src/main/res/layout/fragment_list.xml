@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
+    android:layout_marginBottom="90dp"
     tools:context=".ListFragment">
 
 <!--    heading-->
@@ -81,6 +82,7 @@
 
 <!--medication list-->
     <ScrollView
+        android:id="@+id/medication_list_scroll_view_list"
         android:layout_below="@+id/search_view_container_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -232,6 +234,7 @@
 
         </RelativeLayout>
 
+
     </ScrollView>
 
 <!--    floating button-->
@@ -239,16 +242,15 @@
         android:id="@+id/add_list_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/floating_button"
         android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:backgroundTint="@color/primary"
-        android:contentDescription="@string/add_medication"
         app:srcCompat="@drawable/baseline_create_24"
         app:tint="@color/black"
         app:fabSize="auto"
         app:fabCustomSize="70dp"
         app:elevation="6dp"/>
-
 
 </RelativeLayout>

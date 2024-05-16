@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
+    android:layout_marginBottom="90dp"
     tools:context=".AboutMedicationFragment">
 
 <!--    heading area-->
@@ -157,8 +158,8 @@
             android:layout_height="wrap_content"
             android:text="@string/edit"
             android:textAllCaps="false"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="20dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="10dp"
             android:textColor="@color/black"
             android:drawableStart="@drawable/baseline_edit_24"
             android:drawableTint="@color/black"
@@ -171,8 +172,8 @@
             android:layout_height="wrap_content"
             android:text="@string/delete"
             android:textAllCaps="false"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="20dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="10dp"
             android:layout_marginStart="20dp"
             android:textColor="@color/white"
             android:drawableStart="@drawable/baseline_delete_24"
