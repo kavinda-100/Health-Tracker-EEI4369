@@ -194,7 +194,6 @@
         android:backgroundTint="@color/primary"
         android:contentDescription="@string/add_medication"
         app:elevation="6dp"
-        app:fabCustomSize="70dp"
         app:fabSize="auto"
         app:srcCompat="@drawable/baseline_video_library_24"
         app:tint="@color/black"/>

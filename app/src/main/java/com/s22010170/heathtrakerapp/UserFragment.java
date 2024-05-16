@@ -1,11 +1,13 @@
 package com.s22010170.heathtrakerapp;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -109,17 +111,31 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // show confirm dialog
-                // delete the user account
-                boolean isDeleted = authDataBaseHelper.deleteAccount(globalVariableEmail);
-                if(isDeleted){
-                    showMessage.show("Success", "User account deleted successfully.", getActivity());
-                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableEmail();
-                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableName();
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                }else{
-                    showMessage.show("Error", "Unable to delete the user account.", getActivity());
-                }
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Delete Account")
+                        .setMessage("Are you sure you want to delete this account?")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // delete the user account
+                                boolean isDeleted = authDataBaseHelper.deleteAccount(globalVariableEmail);
+                                if(isDeleted){
+                                    showMessage.show("Success", "User account deleted successfully.", getActivity());
+                                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableEmail();
+                                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableName();
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    showMessage.show("Error", "Unable to delete the user account.", getActivity());
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // Handle the negative button action
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
 
             }
         });
