@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,13 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
     DataBaseHelper authDataBaseHelper;
     ShowMessage showMessage;
-
+    ImageView userImage;
     TextView greeting;
     RelativeLayout medicationListItem;
 
@@ -30,19 +32,36 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
         // TODO:define variables
         greeting = rootView.findViewById(R.id.greet_user_text);
         medicationListItem = rootView.findViewById(R.id.medication_list_item_home);
-        // TODO: create database
+        userImage = rootView.findViewById(R.id.user_avtar_img_home);
+
+        // create database
         authDataBaseHelper = new DataBaseHelper(getActivity());
-        // TODO: create show message object
+
+        // create show message object
         showMessage = new ShowMessage();
-        // TODO: get the global variable
+
+        // get the global variable
         String globalVariableName = ((MyApplication) requireActivity().getApplication()).getGlobalVariableName();
+        // get the global image avatar
+        byte[] globalVariableImageAvatar = ((MyApplication) requireActivity().getApplication()).getGlobalVariableImageAvatar();
+        // check if the global image avatar is not null
+        if(globalVariableImageAvatar != null) {
+            Bitmap ImageAvatar = DbBitmapUtility.getImage(globalVariableImageAvatar);
+            userImage.setImageBitmap(ImageAvatar);
+        }
+        else {
+            userImage.setImageResource(R.drawable.avatarface);
+        }
+        // check if the global variable is not null
         if(globalVariableName != null) {
             greeting.setText("Hello, " + globalVariableName);
+        }else{
+            greeting.setText("Hello, User");
         }
-
         // navigate to the medication details/about fragment
         medicationListItem.setOnClickListener(new View.OnClickListener() {
             @Override

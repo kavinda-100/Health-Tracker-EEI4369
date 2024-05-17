@@ -1,15 +1,24 @@
 package com.s22010170.heathtrakerapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.concurrent.ExecutionException;
+import java.io.InputStream;
 
 public class UserFragment extends Fragment {
     DataBaseHelper authDataBaseHelper;
@@ -28,8 +37,8 @@ public class UserFragment extends Fragment {
     ImageView profileImage, backgroundImage;
     TextView greetingText, emailText;
     String oldPassword, newPassword;
-    byte[] imgAvatar;
-    byte[] imgBackground;
+    byte[] imgAvatar, newImgAvatar;
+    byte[] imgBackground, newImgBackground;
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,10 +65,10 @@ public class UserFragment extends Fragment {
         emailText = rootView.findViewById(R.id.user_email_text);
 
 
-        // get the global variable
+        // TODO: get the global variable
         String globalVariableEmail = ((MyApplication) requireActivity().getApplication()).getGlobalVariableEmail();
 
-        // get the data from the database and display it on the screen
+        // TODO: get the data from the database and display it on the screen
         if(!globalVariableEmail.isEmpty()){
             // get the data from the database
             Cursor cursor = authDataBaseHelper.getUserData(globalVariableEmail);
@@ -74,9 +83,19 @@ public class UserFragment extends Fragment {
                     greetingText.setText("Hello, " + cursor.getString(1));
                     emailText.setText(cursor.getString(2));
                 }
-                if(imgAvatar != null && imgBackground != null){
+                // check if the avatar image is not null
+                if(imgAvatar != null){
                     profileImage.setImageBitmap(DbBitmapUtility.getImage(imgAvatar));
+                    // set the global variable image avatar
+                    ((MyApplication) requireActivity().getApplication()).setGlobalVariableImageAvatar(imgAvatar);
+                }else{
+                    profileImage.setImageResource(R.drawable.avatarface);
+                }
+                // check if the background image is not null
+                if(imgBackground != null){
                     backgroundImage.setImageBitmap(DbBitmapUtility.getImage(imgBackground));
+                }else {
+                    backgroundImage.setImageResource(R.drawable.avatarbg);
                 }
 
             }else{
@@ -87,6 +106,90 @@ public class UserFragment extends Fragment {
             showMessage.show("Error", "Global Variable Email is empty.", getActivity());
         }
 
+        // TODO: Working with images
+        // avatar image result handler
+        ActivityResultLauncher<Intent> mGetContentAvatar = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            // Handle the Intent for avatar image
+                            if(data != null){
+                                try {
+                                    Uri imageUri = data.getData();
+                                    if (imageUri != null) {
+                                        InputStream imageStream = requireActivity().getContentResolver().openInputStream(imageUri);
+                                        // convert the image to bitmap
+                                        Bitmap BitmapAvatar = BitmapFactory.decodeStream(imageStream);
+                                        // set the image to the image view
+                                        profileImage.setImageBitmap(BitmapAvatar);
+                                        // convert the image to byte array to store in the database
+                                        newImgAvatar = DbBitmapUtility.getBytes(BitmapAvatar);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    showMessage.show("Error", "Some thing went wrong!. please try again!", getActivity());
+                                }
+                            }else{
+                                showMessage.show("Error", "Unable to get the image from the gallery.", getActivity());
+                            }
+                        }
+                    }
+                });
+
+        // background image result handler
+        ActivityResultLauncher<Intent> mGetContentBackground = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            // Handle the Intent for background image
+                            if(data != null) {
+                                try {
+                                    Uri imageUri = data.getData();
+                                    if (imageUri != null) {
+                                        InputStream imageStream = requireActivity().getContentResolver().openInputStream(imageUri);
+                                        // convert the image to bitmap
+                                        Bitmap BitmapBackground = BitmapFactory.decodeStream(imageStream);
+                                        // set the image to the image view
+                                        backgroundImage.setImageBitmap(BitmapBackground);
+                                        // convert the image to byte array to store in the database
+                                        newImgBackground = DbBitmapUtility.getBytes(BitmapBackground);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    showMessage.show("Error", "Some thing went wrong!. please try again!", getActivity());
+                                }
+                            }else{
+                                showMessage.show("Error", "Unable to get the image from the gallery.", getActivity());
+                            }
+                        }
+                    }
+                });
+        // get image from avatar
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//                startActivityForResult(gallery, PICK_IMAGE_AVATAR);
+                mGetContentAvatar.launch(gallery);
+            }
+        });
+        // get image from background
+        backgroundImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//                startActivityForResult(gallery, PICK_IMAGE_BACKGROUND);
+                mGetContentBackground.launch(gallery);
+            }
+        });
+
+
         // TODO: update user details
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,18 +197,14 @@ public class UserFragment extends Fragment {
                 // if password not provided then use the old password
                 if(password.getText().toString().isEmpty() && confirmPassword.getText().toString().isEmpty()) {
                     newPassword = oldPassword;
-                    updateUserData(globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, null, null);
-                    ((MyApplication) requireActivity().getApplication()).setGlobalVariableEmail(email.getText().toString());
-                    ((MyApplication) requireActivity().getApplication()).setGlobalVariableName(username.getText().toString());
+                    updateDataWithImages(newImgAvatar, newImgBackground, globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, imgAvatar, imgBackground);
                 }
                 else{
                     // if password provided then use the new password
                     newPassword = password.getText().toString();
                     // check if the password is correct and password and confirm password are same
                     if(newPassword.equals(confirmPassword.getText().toString()) && newPassword.length() < 6){
-                        updateUserData(globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, null, null);
-                        ((MyApplication) requireActivity().getApplication()).setGlobalVariableEmail(email.getText().toString());
-                        ((MyApplication) requireActivity().getApplication()).setGlobalVariableName(username.getText().toString());
+                        updateDataWithImages(newImgAvatar, newImgBackground, globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, imgAvatar, imgBackground);
                     }else{
                         showMessage.show("Error", "Password and confirm password should be same and password should be at least 6 characters long.", getActivity());
                     }
@@ -169,9 +268,20 @@ public class UserFragment extends Fragment {
             }
         });
 
-
-
         return rootView;
+    }
+
+    // TODO: check whether the user is selected the image or not
+    public void updateDataWithImages(byte[] newImgAvatar, byte[] newImgBackground, String oldEmail, String email, String username, String password, byte[] imgAvatar, byte[] imgBackground){
+        if(newImgAvatar != null && newImgBackground != null){
+            updateUserData(oldEmail, email, username, password, newImgAvatar, newImgBackground);
+        }else if(newImgAvatar != null){
+            updateUserData(oldEmail, email, username, password, newImgAvatar, imgBackground);
+        }else if(newImgBackground != null){
+            updateUserData(oldEmail, email, username, password, imgAvatar, newImgBackground);
+        }else{
+            updateUserData(oldEmail, email, username, password, imgAvatar, imgBackground);
+        }
     }
     // TODO:update user data method
     public void updateUserData(String oldEmail, String email, String username, String password, byte[] imgAvatar, byte[] imgBackground){
@@ -179,8 +289,11 @@ public class UserFragment extends Fragment {
         boolean isUpdated = authDataBaseHelper.updateUserData(oldEmail, email, username, password, imgAvatar, imgBackground);
         if(isUpdated){
             showMessage.show("Success", "User data updated successfully.", getActivity());
+            ((MyApplication) requireActivity().getApplication()).setGlobalVariableEmail(email);
+            ((MyApplication) requireActivity().getApplication()).setGlobalVariableName(username);
         }else{
             showMessage.show("Error", "Unable to update the user data.", getActivity());
         }
     }
+
 }
