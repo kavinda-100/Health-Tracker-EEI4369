@@ -30,6 +30,15 @@ public class SharedPrefsManager {
         return sharedPreferences.getString(key, defaultValue);
     }
 
+    // Clear specific fields (e.g., email and username)
+    public void clearFields(String[] keys) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (String key : keys) {
+            editor.remove(key);
+        }
+        editor.apply();
+    }
+
     // Clear all preferences (use with caution)
     public void clearPreferences() {
         SharedPreferences.Editor editor = sharedPreferences.edit();

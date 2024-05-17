@@ -38,6 +38,7 @@ public class SignInActivity extends AppCompatActivity {
         prefsManager = new SharedPrefsManager(this);
         // create show message object
         showMessage = new ShowMessage();
+
         signIn();
         reset();
         backToWelcomeFromSignIn();
@@ -72,7 +73,6 @@ public class SignInActivity extends AppCompatActivity {
                     showMessage.show("Error", "Invalid Credentials", SignInActivity.this);
                     return;
                 }else {
-                    MyApplication myApplication = (MyApplication)getApplication();
                     while (cursor.moveToNext()){
                         // save email and user name to shared preferences
                         prefsManager.saveString("email", cursor.getString(2));

@@ -50,16 +50,28 @@ public class HomeFragment extends Fragment {
 
         // get the global variable
         String sharedPreferencesName = prefsManager.getString("name", null);
-        // get the global image avatar
-        byte[] globalVariableImageAvatar = ((MyApplication) requireActivity().getApplication()).getGlobalVariableImageAvatar();
-        // check if the global image avatar is not null
-        if(globalVariableImageAvatar != null) {
-            Bitmap ImageAvatar = DbBitmapUtility.getImage(globalVariableImageAvatar);
-            userImage.setImageBitmap(ImageAvatar);
+        String sharedPreferencesUserEmail = prefsManager.getString("email", null);
+
+        if(sharedPreferencesUserEmail != null) {
+            // get the data from the database
+            Cursor cursor = authDataBaseHelper.getUserData(sharedPreferencesUserEmail);
+            if(cursor.getCount() != 0){
+                while(cursor.moveToNext()){
+                    byte[] imgAvatar = cursor.getBlob(4);
+                    if(imgAvatar != null) {
+                        userImage.setImageBitmap(DbBitmapUtility.getImage(imgAvatar));
+                    }else{
+                        userImage.setImageResource(R.drawable.avatarface);
+                    }
+                }
+            }else{
+                userImage.setImageResource(R.drawable.avatarface);
+            }
         }
         else {
             userImage.setImageResource(R.drawable.avatarface);
         }
+
         // check if the global variable is not null
         if(sharedPreferencesName != null) {
             greeting.setText("Hello, " + sharedPreferencesName);

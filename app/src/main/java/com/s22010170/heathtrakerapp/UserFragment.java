@@ -90,8 +90,6 @@ public class UserFragment extends Fragment {
                 // check if the avatar image is not null
                 if(imgAvatar != null){
                     profileImage.setImageBitmap(DbBitmapUtility.getImage(imgAvatar));
-                    // set the global variable image avatar
-                    ((MyApplication) requireActivity().getApplication()).setGlobalVariableImageAvatar(imgAvatar);
                 }else{
                     profileImage.setImageResource(R.drawable.avatarface);
                 }
@@ -261,7 +259,8 @@ public class UserFragment extends Fragment {
                 if(isUpdateLoginStatus){
                     showMessage.show("Success", "User logged out successfully.", getActivity());
                     // clear the shared preferences
-                    prefsManager.clearPreferences();
+                    String[] keysToRemove = {"email", "name"};
+                    prefsManager.clearFields(keysToRemove);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }else{
