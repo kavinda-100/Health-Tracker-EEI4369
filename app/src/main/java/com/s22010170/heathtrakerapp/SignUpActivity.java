@@ -23,7 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class SignUpActivity extends AppCompatActivity {
     DataBaseHelper authDataBaseHelper;
     ShowMessage showMessage;
-
+    SharedPrefsManager prefsManager;
     DbBitmapUtility dbBitmapUtility;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         // create database
         authDataBaseHelper = new DataBaseHelper(this);
+        // create shared preferences manager
+        prefsManager = new SharedPrefsManager(this);
         // create dbBitmapUtility object
         dbBitmapUtility = new DbBitmapUtility();
         // create show message object
@@ -54,6 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
         EditText email = findViewById(R.id.sign_up_email);
         EditText password = findViewById(R.id.sign_up_password);
         EditText confirmPassword = findViewById(R.id.sign_up_Confirm_password);
+
+        // TODO:set on click listener for the sign up button
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,19 +86,12 @@ public class SignUpActivity extends AppCompatActivity {
                 // sign up
                 boolean isSignedUp = authDataBaseHelper.signUp(username.getText().toString(), email.getText().toString(), password.getText().toString());
                 if (isSignedUp) {
-                    boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(email.getText().toString(), "true");
-                    if (!isUpdateLoginStatus) {
-                        showMessage.show("Error", "Unable to update login status", SignUpActivity.this);
-                        return;
-                    }
-                    MyApplication myApplication = (MyApplication)getApplication();
-                    myApplication.setGlobalVariableEmail(email.getText().toString());
-                    myApplication.setGlobalVariableName(username.getText().toString());
+                    // save email and user name to shared preferences
+                    prefsManager.saveString("email", email.getText().toString());
+                    prefsManager.saveString("name", username.getText().toString());
                     // show toast message
                     Toast.makeText(SignUpActivity.this, "Signed Up", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                    // pass email to the home fragment
-                    intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 } else {
                     showMessage.show("Error", "Not Signed Up", SignUpActivity.this);

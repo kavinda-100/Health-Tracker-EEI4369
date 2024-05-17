@@ -32,6 +32,7 @@ import java.io.InputStream;
 public class UserFragment extends Fragment {
     DataBaseHelper authDataBaseHelper;
     ShowMessage showMessage;
+    SharedPrefsManager prefsManager;
     EditText email, username, password, confirmPassword;
     Button updateButton, deleteButton, logoutButton;
     ImageView profileImage, backgroundImage;
@@ -46,7 +47,10 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_user, container, false);
         // create database
-        authDataBaseHelper = new DataBaseHelper(getActivity());
+        authDataBaseHelper = new DataBaseHelper(requireActivity());
+
+        // create shared preferences manager
+        prefsManager = new SharedPrefsManager(requireActivity());
 
         // create show message object
         showMessage = new ShowMessage();
@@ -65,13 +69,13 @@ public class UserFragment extends Fragment {
         emailText = rootView.findViewById(R.id.user_email_text);
 
 
-        // TODO: get the global variable
-        String globalVariableEmail = ((MyApplication) requireActivity().getApplication()).getGlobalVariableEmail();
+        // TODO: get the shared preferences values
+        String sharedPreferencesEmail = prefsManager.getString("email", "");
 
         // TODO: get the data from the database and display it on the screen
-        if(!globalVariableEmail.isEmpty()){
+        if(!sharedPreferencesEmail.isEmpty()){
             // get the data from the database
-            Cursor cursor = authDataBaseHelper.getUserData(globalVariableEmail);
+            Cursor cursor = authDataBaseHelper.getUserData(sharedPreferencesEmail);
             if(cursor.getCount() != 0){
                 //display the data on the screen
                 while (cursor.moveToNext()) {
@@ -175,7 +179,6 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//                startActivityForResult(gallery, PICK_IMAGE_AVATAR);
                 mGetContentAvatar.launch(gallery);
             }
         });
@@ -184,7 +187,6 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//                startActivityForResult(gallery, PICK_IMAGE_BACKGROUND);
                 mGetContentBackground.launch(gallery);
             }
         });
@@ -197,14 +199,14 @@ public class UserFragment extends Fragment {
                 // if password not provided then use the old password
                 if(password.getText().toString().isEmpty() && confirmPassword.getText().toString().isEmpty()) {
                     newPassword = oldPassword;
-                    updateDataWithImages(newImgAvatar, newImgBackground, globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, imgAvatar, imgBackground);
+                    updateDataWithImages(newImgAvatar, newImgBackground, sharedPreferencesEmail, email.getText().toString(), username.getText().toString(), newPassword, imgAvatar, imgBackground);
                 }
                 else{
                     // if password provided then use the new password
                     newPassword = password.getText().toString();
                     // check if the password is correct and password and confirm password are same
                     if(newPassword.equals(confirmPassword.getText().toString()) && newPassword.length() < 6){
-                        updateDataWithImages(newImgAvatar, newImgBackground, globalVariableEmail, email.getText().toString(), username.getText().toString(), newPassword, imgAvatar, imgBackground);
+                        updateDataWithImages(newImgAvatar, newImgBackground, sharedPreferencesEmail, email.getText().toString(), username.getText().toString(), newPassword, imgAvatar, imgBackground);
                     }else{
                         showMessage.show("Error", "Password and confirm password should be same and password should be at least 6 characters long.", getActivity());
                     }
@@ -225,11 +227,11 @@ public class UserFragment extends Fragment {
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // delete the user account
-                                boolean isDeleted = authDataBaseHelper.deleteAccount(globalVariableEmail);
+                                boolean isDeleted = authDataBaseHelper.deleteAccount(sharedPreferencesEmail);
                                 if(isDeleted){
                                     showMessage.show("Success", "User account deleted successfully.", getActivity());
-                                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableEmail();
-                                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableName();
+                                    // clear the shared preferences
+                                    prefsManager.clearPreferences();
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
                                     startActivity(intent);
                                 }else{
@@ -255,11 +257,11 @@ public class UserFragment extends Fragment {
                 // show confirm dialog
 
                 // update the login status
-                boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(globalVariableEmail, "false");
+                boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(sharedPreferencesEmail, "false");
                 if(isUpdateLoginStatus){
                     showMessage.show("Success", "User logged out successfully.", getActivity());
-                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableEmail();
-                    ((MyApplication) requireActivity().getApplication()).clearGlobalVariableName();
+                    // clear the shared preferences
+                    prefsManager.clearPreferences();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }else{
@@ -289,8 +291,8 @@ public class UserFragment extends Fragment {
         boolean isUpdated = authDataBaseHelper.updateUserData(oldEmail, email, username, password, imgAvatar, imgBackground);
         if(isUpdated){
             showMessage.show("Success", "User data updated successfully.", getActivity());
-            ((MyApplication) requireActivity().getApplication()).setGlobalVariableEmail(email);
-            ((MyApplication) requireActivity().getApplication()).setGlobalVariableName(username);
+            prefsManager.updateString("email", email);
+            prefsManager.updateString("name", username);
         }else{
             showMessage.show("Error", "Unable to update the user data.", getActivity());
         }

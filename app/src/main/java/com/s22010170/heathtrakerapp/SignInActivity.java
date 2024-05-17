@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class SignInActivity extends AppCompatActivity {
     DataBaseHelper authDataBaseHelper;
     ShowMessage showMessage;
+    SharedPrefsManager prefsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class SignInActivity extends AppCompatActivity {
         });
         // create database
         authDataBaseHelper = new DataBaseHelper(this);
+        // create shared preferences manager
+        prefsManager = new SharedPrefsManager(this);
         // create show message object
         showMessage = new ShowMessage();
         signIn();
@@ -69,20 +72,14 @@ public class SignInActivity extends AppCompatActivity {
                     showMessage.show("Error", "Invalid Credentials", SignInActivity.this);
                     return;
                 }else {
-                    boolean isUpdateLoginStatus = authDataBaseHelper.updateLoginStatus(email.getText().toString(), "true");
-                    if (!isUpdateLoginStatus) {
-                        showMessage.show("Error", "Unable to update login status", SignInActivity.this);
-                        return;
-                    }
                     MyApplication myApplication = (MyApplication)getApplication();
                     while (cursor.moveToNext()){
-                        myApplication.setGlobalVariableEmail(cursor.getString(2));
-                        myApplication.setGlobalVariableName(cursor.getString(1));
+                        // save email and user name to shared preferences
+                        prefsManager.saveString("email", cursor.getString(2));
+                        prefsManager.saveString("name", cursor.getString(1));
                     }
                     Toast.makeText(SignInActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                    // pass email to the home fragment
-                    intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 }
 

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
     DataBaseHelper authDataBaseHelper;
+    SharedPrefsManager prefsManager;
     ShowMessage showMessage;
     ImageView userImage;
     TextView greeting;
@@ -41,11 +42,14 @@ public class HomeFragment extends Fragment {
         // create database
         authDataBaseHelper = new DataBaseHelper(getActivity());
 
+        // create shared preferences manager
+        prefsManager = new SharedPrefsManager(requireActivity());
+
         // create show message object
         showMessage = new ShowMessage();
 
         // get the global variable
-        String globalVariableName = ((MyApplication) requireActivity().getApplication()).getGlobalVariableName();
+        String sharedPreferencesName = prefsManager.getString("name", null);
         // get the global image avatar
         byte[] globalVariableImageAvatar = ((MyApplication) requireActivity().getApplication()).getGlobalVariableImageAvatar();
         // check if the global image avatar is not null
@@ -57,8 +61,8 @@ public class HomeFragment extends Fragment {
             userImage.setImageResource(R.drawable.avatarface);
         }
         // check if the global variable is not null
-        if(globalVariableName != null) {
-            greeting.setText("Hello, " + globalVariableName);
+        if(sharedPreferencesName != null) {
+            greeting.setText("Hello, " + sharedPreferencesName);
         }else{
             greeting.setText("Hello, User");
         }

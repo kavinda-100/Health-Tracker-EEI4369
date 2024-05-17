@@ -22,8 +22,9 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int IMAGE_PICK_CODE = 1000;
+    SharedPrefsManager prefsManager;
     private static final int PERMISSION_CODE = 1001;
+    private String sharedPreferencesEmail;
     ShowMessage showMessage;
     @RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @Override
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // create shared preferences manager
+        prefsManager = new SharedPrefsManager(this);
+        // get the email from shared preferences
+        sharedPreferencesEmail = prefsManager.getString("email", "");
+        // create show message object
         showMessage = new ShowMessage();
 
         welcome();
@@ -58,7 +64,13 @@ public class MainActivity extends AppCompatActivity {
                         requestPermissions(permissions, PERMISSION_CODE);
                     }else{
                         // permission already granted
-                        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                        // check if the user is already signed in
+                        Intent intent;
+                        if (!sharedPreferencesEmail.isEmpty()) {
+                            intent = new Intent(MainActivity.this, HomeActivity.class);
+                        } else {
+                            intent = new Intent(MainActivity.this, SignInActivity.class);
+                        }
                         startActivity(intent);
                     }
                 }else{
@@ -76,7 +88,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // permission was granted
-                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                // check if the user is already signed in
+                Intent intent;
+                if (!sharedPreferencesEmail.isEmpty()) {
+                    intent = new Intent(MainActivity.this, HomeActivity.class);
+                } else {
+                    intent = new Intent(MainActivity.this, SignInActivity.class);
+                }
                 startActivity(intent);
             } else {
                 // permission was denied
