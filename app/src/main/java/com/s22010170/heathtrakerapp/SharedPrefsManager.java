@@ -30,6 +30,26 @@ public class SharedPrefsManager {
         return sharedPreferences.getString(key, defaultValue);
     }
 
+    // Save an boolean value
+    public void saveBoolean(String key, boolean value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
+    // get a boolean value
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return sharedPreferences.getBoolean(key, defaultValue);
+    }
+    // Clear specific field(boolean)
+    public void clearBooleanField(String[] keys) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (String key : keys) {
+            editor.remove(key);
+        }
+        editor.apply();
+    }
+
     // Clear specific fields (e.g., email and username)
     public void clearFields(String[] keys) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -45,4 +65,6 @@ public class SharedPrefsManager {
         editor.clear();
         editor.apply();
     }
+
+
 }

@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ public class UserFragment extends Fragment {
     Button updateButton, deleteButton, logoutButton;
     ImageView profileImage, backgroundImage;
     TextView greetingText, emailText;
+    CheckBox showFingerPrint;
     String oldPassword, newPassword;
     byte[] imgAvatar, newImgAvatar;
     byte[] imgBackground, newImgBackground;
@@ -67,10 +70,12 @@ public class UserFragment extends Fragment {
         backgroundImage = rootView.findViewById(R.id.user_background_img);
         greetingText = rootView.findViewById(R.id.user_greet_text);
         emailText = rootView.findViewById(R.id.user_email_text);
+        showFingerPrint = rootView.findViewById(R.id.fingerprint_enable_checkbox);
 
 
         // TODO: get the shared preferences values
         String sharedPreferencesEmail = prefsManager.getString("email", "");
+        showFingerPrint.setChecked(prefsManager.getBoolean("isFingerPrintAllowed", false));
 
         // TODO: get the data from the database and display it on the screen
         if(!sharedPreferencesEmail.isEmpty()){
@@ -188,6 +193,16 @@ public class UserFragment extends Fragment {
                 mGetContentBackground.launch(gallery);
             }
         });
+
+        // TODO: enable fingerprint or disable fingerprint
+        showFingerPrint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // update the fingerprint status in shared preferences
+                prefsManager.saveBoolean("isFingerPrintAllowed", isChecked);
+            }
+        });
+
 
 
         // TODO: update user details

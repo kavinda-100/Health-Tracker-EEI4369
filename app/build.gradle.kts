@@ -47,4 +47,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.maps.android:android-maps-utils:3.8.0")
+    implementation("androidx.biometric:biometric:1.1.0")
 }

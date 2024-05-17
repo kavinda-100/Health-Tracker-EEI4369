@@ -150,11 +150,23 @@
                     android:autofillHints="emailAddress"
                     android:inputType="textPassword" />
 
+                <CheckBox
+                    android:id="@+id/fingerprint_enable_checkbox"
+                    android:layout_below="@+id/update_user_confirm_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/enable_fingerprint_text"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    />
+
                 <LinearLayout
                     android:id="@+id/user_button_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/update_user_confirm_password"
+                    android:layout_below="@+id/fingerprint_enable_checkbox"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
