@@ -19,26 +19,4 @@ public class ShowMessage {
         builder.show();
     }
 
-    // show confirm dialog that return turn if the user click on the positive button else return false
-//    public boolean showConfirmDialog(String title, String message, Context context) {
-//
-//        new AlertDialog.Builder(context)
-//                .setTitle(title)
-//                .setMessage(message)
-//                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-//
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        // Handle the positive button action (e.g., perform the action)
-//                        isConfirmed = true;
-//                    }
-//                })
-//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        // Handle the negative button action
-//                        isConfirmed = false;
-//                    }
-//                })
-//                .show();
-//        return isConfirmed;
-//    }
 }

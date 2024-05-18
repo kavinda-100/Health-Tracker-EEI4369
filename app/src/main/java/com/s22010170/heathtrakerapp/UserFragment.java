@@ -288,7 +288,8 @@ public class UserFragment extends Fragment {
     }
 
     // TODO: check whether the user is selected the image or not
-    public void updateDataWithImages(byte[] newImgAvatar, byte[] newImgBackground, String oldEmail, String email, String username, String password, byte[] imgAvatar, byte[] imgBackground){
+    public void updateDataWithImages(byte[] newImgAvatar, byte[] newImgBackground, String oldEmail,
+                                     String email, String username, String password, byte[] imgAvatar, byte[] imgBackground){
         if(newImgAvatar != null && newImgBackground != null){
             updateUserData(oldEmail, email, username, password, newImgAvatar, newImgBackground);
         }else if(newImgAvatar != null){

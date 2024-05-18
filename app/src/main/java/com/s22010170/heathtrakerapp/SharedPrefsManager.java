@@ -65,6 +65,4 @@ public class SharedPrefsManager {
         editor.clear();
         editor.apply();
     }
-
-
 }
