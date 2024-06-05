@@ -32,7 +32,7 @@
         android:theme="@style/Theme.HeathTrakerApp"
         tools:targetApi="31">
         <activity
-            android:name=".PasswordResetVerfyActivity"
+            android:name=".PasswordResetVerifyActivity"
             android:exported="false" />
         <activity
             android:name=".EmailVerifyActivity"
