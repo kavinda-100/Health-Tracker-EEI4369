@@ -14,16 +14,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // database name and version
     public static final String DATABASE_NAME = "HeathTracker.db";
     public static final int DATABASE_VERSION = 1;
-    // table names
+    //TODO: table names
     public static final String USER_TABLE_NAME = "user_table";
+    public static final String MEDICATION_TABLE_NAME = "medication_table";
     // column names
-    // for user table
+    //TODO: for user table
     public static final String user_COL_2 = "username";
     public static final String user_COL_3 = "email";
     public static final String user_COL_4 = "password";
     public static final String user_COL_5 = "imgAvatar";
     public static final String user_COL_6 = "imgBackground";
     public static final String user_COL_7 = "isLoggedIn";
+
+    //TODO: for medication table
+    public static final String medication_COL_2 = "medicationName";
+    public static final String medication_COL_3 = "description";
+    public static final String medication_COL_4 = "dosage";
+    public static final String medication_COL_5 = "medicationImage";
+    public static final String medication_COL_6 = "notificationTime";
+    public static final String medication_COL_7 = "notificationRepeatTime";
+
+
     public DataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // crate database and table
@@ -34,6 +45,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // create user table
         db.execSQL("CREATE TABLE " + USER_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT, IMGAVATAR BLOB, IMGBACKGROUND BLOB, ISLOGGEDIN TEXT DEFAULT 'false')");
+        // create medication table
+        db.execSQL("CREATE TABLE " + MEDICATION_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, MEDICATIONNAME TEXT, DESCRIPTION TEXT, DOSAGE TEXT, MEDICATIONIMAGE BLOB, NOTIFICATIONTIME TEXT, NOTIFICATIONREPEATTIME TEXT)");
 
     }
 
@@ -41,10 +54,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // drop table if exists
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MEDICATION_TABLE_NAME);
         // create table
         onCreate(db);
 
     }
+
+    //TODO: CRUD operations for User -----------------------------------------------------------------------------------
+
     // sign up method
     public boolean signUp(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -109,5 +126,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         long result = db.update(USER_TABLE_NAME, contentValues, "EMAIL = ?", new String[]{oldEmail});
 
         return result != -1;
+    }
+
+    //TODO: CRUD operations for Medication -----------------------------------------------------------------------------------
+
+    // insert medication
+    public boolean insertMedication(String medicationName, String description, String dosage, byte[] medicationImage, String notificationTime, String notificationRepeatTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(medication_COL_2, medicationName);
+        contentValues.put(medication_COL_3, description);
+        contentValues.put(medication_COL_4, dosage);
+        contentValues.put(medication_COL_5, medicationImage);
+        contentValues.put(medication_COL_6, notificationTime);
+        contentValues.put(medication_COL_7, notificationRepeatTime);
+
+        long result = db.insert(MEDICATION_TABLE_NAME, null, contentValues);
+
+        return result != -1;
+    }
+
+    // get all medications
+    public Cursor getAllMedications() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + MEDICATION_TABLE_NAME, null);
     }
 }

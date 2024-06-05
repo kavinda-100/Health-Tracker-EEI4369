@@ -85,4 +85,10 @@
     <string name="enter_opt_code">Enter OPT Code</string>
     <string name="verify_your_email">Verify your email</string>
     <string name="verify">Verify</string>
+    <string name="add_time">Add time</string>
+    <string name="_12_00_a_m">12 : 00: a.m</string>
+    <string name="after">after</string>
+    <string name="hours">hours</string>
+    <string name="_6">6</string>
+    <string name="image_overview">Image overview</string>
 </resources>

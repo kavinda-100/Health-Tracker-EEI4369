@@ -1,7 +1,12 @@
 package com.s22010170.heathtrakerapp;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        createNotificationChannel();
         // find the bottom navigation view
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         // replace home activity with the home fragment
@@ -61,6 +67,18 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "medicationReminderApp";
+            String desc = "Channel for medication Alarm Manager";
+            int imp = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("medicationReminder", name, imp);
+            channel.setDescription(desc);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
