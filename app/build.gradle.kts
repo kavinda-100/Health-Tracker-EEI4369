@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.Packaging
 
 
 plugins {
@@ -35,6 +36,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources.excludes.add("META-INF/NOTICE.md")
+        resources.excludes.add("META-INF/LICENSE.md")
+    }
 }
 
 dependencies {
@@ -48,4 +53,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.maps.android:android-maps-utils:3.8.0")
     implementation("androidx.biometric:biometric:1.1.0")
+    implementation("com.sun.mail:android-mail:1.6.6")
+    implementation("com.sun.mail:android-activation:1.6.7")
 }

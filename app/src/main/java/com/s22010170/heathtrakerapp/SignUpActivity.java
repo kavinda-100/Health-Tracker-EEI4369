@@ -2,6 +2,7 @@ package com.s22010170.heathtrakerapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.s22010170.heathtrakerapp.utils.DataBaseHelper;
 import com.s22010170.heathtrakerapp.utils.DbBitmapUtility;
+import com.s22010170.heathtrakerapp.utils.SendEmails;
 import com.s22010170.heathtrakerapp.utils.SharedPrefsManager;
 import com.s22010170.heathtrakerapp.utils.ShowMessage;
 
@@ -25,6 +27,9 @@ public class SignUpActivity extends AppCompatActivity {
     ShowMessage showMessage;
     SharedPrefsManager prefsManager;
     DbBitmapUtility dbBitmapUtility;
+    SendEmails sendEmails;
+
+    String MyEmail, MyEmailAppPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,12 @@ public class SignUpActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // get the email and password from the strings.xml
+        MyEmail = getResources().getString(R.string.my_email);
+        MyEmailAppPassword = getResources().getString(R.string.my_email_app_password);
+
+        // create send email object
+        sendEmails = new SendEmails(MyEmail, MyEmailAppPassword);
 
         // create database
         authDataBaseHelper = new DataBaseHelper(this);
@@ -89,10 +100,32 @@ public class SignUpActivity extends AppCompatActivity {
                     // save email and user name to shared preferences
                     prefsManager.saveString("email", email.getText().toString());
                     prefsManager.saveString("name", username.getText().toString());
-                    // show toast message
-                    Toast.makeText(SignUpActivity.this, "Signed Up", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    // subject and message for the email
+                    String OPT = sendEmails.getOTP();
+                    String subject = "Email Verification";
+                    String message = "Please verify your email by entering the OTP: " + OPT + "\n\n" + "Thank you";
+                    // send email to the user
+                    boolean isEmailSent = sendEmails.sendEmailToUser(email.getText().toString(), subject, message);
+                    // check if the email is sent
+                    if (isEmailSent) {
+                        // save the OTP to shared preferences
+                        prefsManager.saveString("email_otp", OPT);
+                        // show message
+                        showMessage.show("Success", "OPT has send to you email. please check your email for verify you email in next screen.", SignUpActivity.this);
+                        // wait for 5 seconds
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // go to the email verify activity
+                                Intent intent = new Intent(SignUpActivity.this, EmailVerifyActivity.class);
+                                startActivity(intent);
+                            }
+                        }, 4000); // 4000 milliseconds = 4 seconds
+
+                    } else {
+                        showMessage.show("Error", "Email Not Sent. please try again.", SignUpActivity.this);
+                    }
                 } else {
                     showMessage.show("Error", "Not Signed Up", SignUpActivity.this);
                 }

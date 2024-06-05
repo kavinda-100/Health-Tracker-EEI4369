@@ -12,7 +12,23 @@ public class SharedPrefsManager {
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
-    // Save a string value
+    //TODO: Clear all preferences -----------------------------------------------------------------------
+    public void clearPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    //TODO: Clear specific fields (e.g., email and username) ---------------------------------------------
+    public void clearFields(String[] keys) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (String key : keys) {
+            editor.remove(key);
+        }
+        editor.apply();
+    }
+
+    //TODO: for Save a string values ---------------------------------------------------------------------
     public void saveString(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
@@ -30,7 +46,7 @@ public class SharedPrefsManager {
         return sharedPreferences.getString(key, defaultValue);
     }
 
-    // Save an boolean value
+    //TODO:  for Save an boolean value -------------------------------------------------------------------
     public void saveBoolean(String key, boolean value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
@@ -41,28 +57,16 @@ public class SharedPrefsManager {
     public boolean getBoolean(String key, boolean defaultValue) {
         return sharedPreferences.getBoolean(key, defaultValue);
     }
-    // Clear specific field(boolean)
-    public void clearBooleanField(String[] keys) {
+
+    //TODO: for save integer values -----------------------------------------------------------
+    // Save an integer value
+    public void saveInt(String key, int value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (String key : keys) {
-            editor.remove(key);
-        }
+        editor.putInt(key, value);
         editor.apply();
     }
-
-    // Clear specific fields (e.g., email and username)
-    public void clearFields(String[] keys) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (String key : keys) {
-            editor.remove(key);
-        }
-        editor.apply();
-    }
-
-    // Clear all preferences (use with caution)
-    public void clearPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
+    // Retrieve an integer value
+    public int getInt(String key, int defaultValue) {
+        return sharedPreferences.getInt(key, defaultValue);
     }
 }

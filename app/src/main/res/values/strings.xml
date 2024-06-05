@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">HeathTrackerApp</string>
     <string name="my_api_key">AIzaSyApDBHYO8X4x6wHje9G8dEiZu37ZR1eQ5g</string>
+    <string name="my_email_app_password">pvizwgsjrrqqtqrw</string>
+    <string name="my_email">kavinda.local.dev@gmail.com</string>
+
+
+    <!--    other values-->
     <string name="continue_text">Continue</string>
     <string name="heath_tracker_heading">Heath Tracker</string>
     <string name="back_text">Back</string>
@@ -74,4 +79,10 @@
     <string name="add">Add</string>
     <string name="floating_button">floating button</string>
     <string name="enable_fingerprint_text">Enable Fingerprint</string>
+    <string name="opt_hint">03659</string>
+    <string name="didn_t_receive_the_email_yet">didn\'t receive the email yet?</string>
+    <string name="resend_email">resend email</string>
+    <string name="enter_opt_code">Enter OPT Code</string>
+    <string name="verify_your_email">Verify your email</string>
+    <string name="verify">Verify</string>
 </resources>
