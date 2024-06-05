@@ -1,23 +1,22 @@
 package com.s22010170.heathtrakerapp;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.s22010170.heathtrakerapp.utils.DataBaseHelper;
+import com.s22010170.heathtrakerapp.utils.DbBitmapUtility;
+import com.s22010170.heathtrakerapp.utils.SharedPrefsManager;
+import com.s22010170.heathtrakerapp.utils.ShowMessage;
 
 public class HomeFragment extends Fragment {
     DataBaseHelper authDataBaseHelper;

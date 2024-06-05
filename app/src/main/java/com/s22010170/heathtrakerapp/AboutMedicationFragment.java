@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.s22010170.heathtrakerapp.utils.ShowMessage;
 
 public class AboutMedicationFragment extends Fragment {
 

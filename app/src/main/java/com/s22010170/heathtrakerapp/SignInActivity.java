@@ -1,7 +1,6 @@
 package com.s22010170.heathtrakerapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.s22010170.heathtrakerapp.utils.DataBaseHelper;
+import com.s22010170.heathtrakerapp.utils.SharedPrefsManager;
+import com.s22010170.heathtrakerapp.utils.ShowMessage;
 
 public class SignInActivity extends AppCompatActivity {
     DataBaseHelper authDataBaseHelper;

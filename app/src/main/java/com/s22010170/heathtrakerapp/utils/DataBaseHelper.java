@@ -1,4 +1,4 @@
-package com.s22010170.heathtrakerapp;
+package com.s22010170.heathtrakerapp.utils;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.s22010170.heathtrakerapp;
+package com.s22010170.heathtrakerapp.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;

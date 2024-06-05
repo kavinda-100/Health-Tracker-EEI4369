@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.s22010170.heathtrakerapp.utils.ShowMessage;
+
 public class MapFragment extends Fragment {
     ShowMessage showMessage;
     EditText originText, destinationText;
