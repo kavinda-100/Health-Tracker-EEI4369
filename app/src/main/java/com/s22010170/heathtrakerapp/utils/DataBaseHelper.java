@@ -151,4 +151,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + MEDICATION_TABLE_NAME, null);
     }
+
+    // get medication by id
+    public Cursor getMedicationById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + MEDICATION_TABLE_NAME + " WHERE ID = " + id, null);
+    }
 }

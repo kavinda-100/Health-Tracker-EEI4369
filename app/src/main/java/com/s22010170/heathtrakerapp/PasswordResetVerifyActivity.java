@@ -54,13 +54,13 @@ public class PasswordResetVerifyActivity extends AppCompatActivity {
         showMessage = new ShowMessage();
 
         // get the email from shared preferences
-        passwordOPT = prefsManager.getString("password_otp", null);
         userEmail = getIntent().getStringExtra("email");
 
         //TODO: Implement the password reset verification logic
         verifyPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                passwordOPT = prefsManager.getString("password_otp", null);
                 String OPT = passwordVerifyOPT.getText().toString();
                 // check OPT input is empty
                 if(OPT.isEmpty()){

@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +14,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.s22010170.heathtrakerapp.utils.DataBaseHelper;
 import com.s22010170.heathtrakerapp.utils.DbBitmapUtility;
+import com.s22010170.heathtrakerapp.utils.MedicationListModel;
+import com.s22010170.heathtrakerapp.utils.MedicationListRecyclerViewInterface;
+import com.s22010170.heathtrakerapp.utils.MedicationListRecyclerviewAdapter;
 import com.s22010170.heathtrakerapp.utils.SharedPrefsManager;
 import com.s22010170.heathtrakerapp.utils.ShowMessage;
 
-public class HomeFragment extends Fragment {
-    DataBaseHelper authDataBaseHelper;
+import java.util.ArrayList;
+
+public class HomeFragment extends Fragment implements MedicationListRecyclerViewInterface {
+    DataBaseHelper dataBaseHelper;
     SharedPrefsManager prefsManager;
     ShowMessage showMessage;
+    ArrayList<MedicationListModel> medicationList = new ArrayList<MedicationListModel>();
+    RecyclerView medicationHomeRecyclerView;
     ImageView userImage;
     TextView greeting;
-    RelativeLayout medicationListItem;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,14 +42,8 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        // TODO:define variables
-        greeting = rootView.findViewById(R.id.greet_user_text);
-        medicationListItem = rootView.findViewById(R.id.medication_list_item_home);
-        userImage = rootView.findViewById(R.id.user_avtar_img_home);
-
         // create database
-        authDataBaseHelper = new DataBaseHelper(getActivity());
+        dataBaseHelper = new DataBaseHelper(getActivity());
 
         // create shared preferences manager
         prefsManager = new SharedPrefsManager(requireActivity());
@@ -48,13 +51,19 @@ public class HomeFragment extends Fragment {
         // create show message object
         showMessage = new ShowMessage();
 
+        // TODO:define variables
+        greeting = rootView.findViewById(R.id.greet_user_text);
+        userImage = rootView.findViewById(R.id.user_avtar_img_home);
+        medicationHomeRecyclerView = rootView.findViewById(R.id.medication_home_recycler_view);
+
         // get the global variable
         String sharedPreferencesName = prefsManager.getString("name", null);
         String sharedPreferencesUserEmail = prefsManager.getString("email", null);
 
+        //TODO: setting the user image
         if(sharedPreferencesUserEmail != null) {
             // get the data from the database
-            Cursor cursor = authDataBaseHelper.getUserData(sharedPreferencesUserEmail);
+            Cursor cursor = dataBaseHelper.getUserData(sharedPreferencesUserEmail);
             if(cursor.getCount() != 0){
                 while(cursor.moveToNext()){
                     byte[] imgAvatar = cursor.getBlob(4);
@@ -78,19 +87,50 @@ public class HomeFragment extends Fragment {
         }else{
             greeting.setText("Hello, User");
         }
-        // navigate to the medication details/about fragment
-        medicationListItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AboutMedicationFragment aboutMedicationFragment = new AboutMedicationFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.home_container, aboutMedicationFragment)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("fromHomeFragment")
-                        .commit();
-            }
-        });
+
+        //TODO: populate the medicationList Array with medication list data
+        getMedicationListData();
+        //TODO: NOTE- set the recycler view adapter after getMedicationListData() method called
+        MedicationListRecyclerviewAdapter medicationListRecyclerviewAdapter = new MedicationListRecyclerviewAdapter(requireContext(), medicationList, false, this);
+        medicationHomeRecyclerView.setAdapter(medicationListRecyclerviewAdapter);
+        medicationHomeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         return rootView;
+    }
+
+
+    // get the all medication list data
+    public void getMedicationListData() {
+        Cursor cursor = dataBaseHelper.getAllMedications();
+        if(cursor.getCount() == 0) {
+            Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show();
+//            showMessage.show("Message", "No data found", requireContext());
+        } else {
+            while(cursor.moveToNext()) {
+                int medicationId = cursor.getInt(0);
+                String medicationName = cursor.getString(1);
+                String medicationDosage = cursor.getString(3);
+                String medicationTime = cursor.getString(5);
+                String medicationFrequency = cursor.getString(6);
+                MedicationListModel medicationListModel = new MedicationListModel(medicationId, medicationName, medicationDosage, medicationTime, medicationFrequency);
+                medicationList.add(medicationListModel);
+            }
+        }
+    }
+
+    @Override
+    public void onMedicationItemClick(int position) {
+        AboutMedicationFragment aboutMedicationFragment = new AboutMedicationFragment();
+        // Create a new Bundle to hold arguments
+        Bundle args = new Bundle();
+        // Put the medication id into the Bundle
+        args.putInt("medicationId", medicationList.get(position).getMedicationId());
+        // Set the Bundle as arguments for the fragment
+        aboutMedicationFragment.setArguments(args);
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.home_container, aboutMedicationFragment)
+                .setReorderingAllowed(true)
+                .addToBackStack("fromListFragment")
+                .commit();
     }
 }

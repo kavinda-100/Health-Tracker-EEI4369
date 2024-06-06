@@ -91,4 +91,7 @@
     <string name="hours">hours</string>
     <string name="_6">6</string>
     <string name="image_overview">Image overview</string>
+    <string name="time_of_taking">Time of taking</string>
+    <string name="time_of_frequency">Time of frequency</string>
+    <string name="every_6_hours">every 6 hours</string>
 </resources>

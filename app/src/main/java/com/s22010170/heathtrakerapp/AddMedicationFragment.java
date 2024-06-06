@@ -169,12 +169,14 @@ public class AddMedicationFragment extends Fragment {
                     return;
                 }
                 // set the alarm
-                setAlarm();
+                if(isUserSetTime){
+                    setAlarm();
+                }
                 if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
                 }
                 else{
-                    InsertMedication(name, description, dosage, medicationImage, null, null);
+                    InsertMedication(name, description, dosage, medicationImage, "", "");
                 }
             }
         });

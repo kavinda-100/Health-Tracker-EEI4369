@@ -56,13 +56,13 @@ public class EmailVerifyActivity extends AppCompatActivity {
         showMessage = new ShowMessage();
 
         // get the email from shared preferences
-        EmailOPT = prefsManager.getString("email_otp", null);
         userEmail = prefsManager.getString("email", null);
 
         //TODO: handle verify OPT
         verifyEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EmailOPT = prefsManager.getString("email_otp", null);
                 String OPT = emailVerifyOPT.getText().toString();
                 // check OPT input is empty
                 if(OPT.isEmpty()){
