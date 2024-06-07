@@ -95,13 +95,13 @@ public class UserFragment extends Fragment {
         themeModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // update the theme mode in shared preferences
-                prefsManager.saveBoolean("nightMode", isChecked);
                 if(isChecked){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }else{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+                // update the theme mode in shared preferences
+                prefsManager.saveBoolean("nightMode", isChecked);
             }
         });
 

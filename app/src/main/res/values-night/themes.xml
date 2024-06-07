@@ -45,5 +45,11 @@
         <item name="android:background">@drawable/input_background_dark</item>
         <item name="android:textColor">@color/lite_text_color_dark</item>
     </style>
+    <style name="menu_background" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:background">@drawable/menu_background_dark</item>
+        <item name="itemIconTint">@drawable/menu_item_selecter_dark</item>
+        <item name="itemRippleColor">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
+    </style>
 
 </resources>

@@ -120,6 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 // go to the email verify activity
                                 Intent intent = new Intent(SignUpActivity.this, EmailVerifyActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         }, 4000); // 4000 milliseconds = 4 seconds
 

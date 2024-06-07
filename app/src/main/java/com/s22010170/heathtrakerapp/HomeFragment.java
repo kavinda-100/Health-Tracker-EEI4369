@@ -60,6 +60,13 @@ public class HomeFragment extends Fragment implements MedicationListRecyclerView
         String sharedPreferencesName = prefsManager.getString("name", null);
         String sharedPreferencesUserEmail = prefsManager.getString("email", null);
 
+        //TODO: populate the medicationList Array with medication list data
+        getMedicationListData();
+        //TODO: NOTE- set the recycler view adapter after getMedicationListData() method called
+        MedicationListRecyclerviewAdapter medicationListRecyclerviewAdapter = new MedicationListRecyclerviewAdapter(requireContext(), medicationList, true, this);
+        medicationHomeRecyclerView.setAdapter(medicationListRecyclerviewAdapter);
+        medicationHomeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
         //TODO: setting the user image
         if(sharedPreferencesUserEmail != null) {
             // get the data from the database
@@ -88,12 +95,6 @@ public class HomeFragment extends Fragment implements MedicationListRecyclerView
             greeting.setText("Hello, User");
         }
 
-        //TODO: populate the medicationList Array with medication list data
-        getMedicationListData();
-        //TODO: NOTE- set the recycler view adapter after getMedicationListData() method called
-        MedicationListRecyclerviewAdapter medicationListRecyclerviewAdapter = new MedicationListRecyclerviewAdapter(requireContext(), medicationList, false, this);
-        medicationHomeRecyclerView.setAdapter(medicationListRecyclerviewAdapter);
-        medicationHomeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         return rootView;
     }
@@ -107,6 +108,7 @@ public class HomeFragment extends Fragment implements MedicationListRecyclerView
             medicationHomeRecyclerView.setVisibility(View.GONE);
         } else {
             while(cursor.moveToNext()) {
+                medicationHomeRecyclerView.setVisibility(View.VISIBLE);
                 int medicationId = cursor.getInt(0);
                 String medicationName = cursor.getString(1);
                 String medicationDosage = cursor.getString(3);

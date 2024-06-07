@@ -49,7 +49,6 @@ public class ListFragment extends Fragment implements MedicationListRecyclerView
         medicationListRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
-
         //TODO: navigate to the add list fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +74,7 @@ public class ListFragment extends Fragment implements MedicationListRecyclerView
 //            showMessage.show("Message", "No data found", requireContext());
         } else {
             while(cursor.moveToNext()) {
+                medicationListRecyclerView.setVisibility(View.VISIBLE);
                 int medicationId = cursor.getInt(0);
                 String medicationName = cursor.getString(1);
                 String medicationDosage = cursor.getString(3);
