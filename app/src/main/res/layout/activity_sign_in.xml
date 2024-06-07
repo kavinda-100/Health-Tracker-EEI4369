@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    style="@style/screenBackground"
     tools:context=".SignInActivity">
 
     <LinearLayout
         android:id="@+id/Back_button_area_sign_in"
         android:orientation="horizontal"
         android:layout_margin="20dp"
-        android:background="@drawable/input_background"
+        style="@style/input_background"
         android:paddingHorizontal="10dp"
         android:paddingVertical="5dp"
         android:layout_width="wrap_content"
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/back_button_image_description"
             android:src="@drawable/chevronleft"
+            style="@style/icon_tint"
             />
 
         <TextView
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/back_text"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            style="@style/primary_text"
             android:textSize="16sp"
             />
 
@@ -52,7 +53,7 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:text="@string/sign_in_with_us_text"
-            android:textColor="@color/black"
+            style="@style/primary_text"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -62,11 +63,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:textColor="@color/black"
             android:hint="@string/email_text"
-            android:textColorHint="@color/lite_text_color"
             android:layout_marginTop="20dp"
-            android:background="@drawable/input_background"
+            style="@style/input_hint_and_text_and_bg"
+            android:textSize="17sp"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress" />
 
@@ -76,11 +76,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:textColor="@color/black"
             android:hint="@string/password_text"
-            android:textColorHint="@color/lite_text_color"
+            style="@style/input_hint_and_text_and_bg"
             android:layout_marginTop="20dp"
-            android:background="@drawable/input_background"
             android:autofillHints="password"
             android:inputType="textPassword" />
 
@@ -96,14 +94,14 @@
                 android:id="@+id/textQA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:text="@string/don_t_have_an_account_text"
                 />
 
             <TextView
                 android:id="@+id/textSignIn"
                 android:layout_marginStart="10dp"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,14 +121,14 @@
                 android:id="@+id/textQAReset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:text="@string/forgot_password_text"
                 />
 
             <TextView
                 android:id="@+id/textReset"
                 android:layout_marginStart="10dp"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -63,10 +63,8 @@ public class AddMedicationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_medication, container, false);
         // create database
         medicationDataBaseHelper = new DataBaseHelper(requireActivity());
-
         // create shared preferences manager
         prefsManager = new SharedPrefsManager(requireActivity());
-
         // create show message object
         showMessage = new ShowMessage();
 
@@ -168,16 +166,17 @@ public class AddMedicationFragment extends Fragment {
                     showMessage.show("Error", "Please fill all the fields", getActivity());
                     return;
                 }
-                // set the alarm
-                if(isUserSetTime){
-                    setAlarm();
-                }
-                if (medicationNotificationSwitch.isChecked() && isUserSetTime){
-                    InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
-                }
-                else{
-                    InsertMedication(name, description, dosage, medicationImage, "", "");
-                }
+                InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
+//                // set the alarm
+//                if(isUserSetTime){
+//                    setAlarm();
+//                }
+//                if (medicationNotificationSwitch.isChecked()){
+//                    InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
+//                }
+//                else{
+//                    InsertMedication(name, description, dosage, medicationImage, "", "");
+//                }
             }
         });
 

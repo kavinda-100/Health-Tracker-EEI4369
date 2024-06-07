@@ -15,6 +15,8 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -26,6 +28,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.s22010170.heathtrakerapp.utils.DataBaseHelper;
@@ -44,7 +47,9 @@ public class UserFragment extends Fragment {
     ImageView profileImage, backgroundImage;
     TextView greetingText, emailText;
     CheckBox showFingerPrint;
+    SwitchCompat themeModeSwitch;
     String oldPassword, newPassword;
+    boolean isNightMode;
     byte[] imgAvatar, newImgAvatar;
     byte[] imgBackground, newImgBackground;
     @SuppressLint("SetTextI18n")
@@ -75,11 +80,30 @@ public class UserFragment extends Fragment {
         greetingText = rootView.findViewById(R.id.user_greet_text);
         emailText = rootView.findViewById(R.id.user_email_text);
         showFingerPrint = rootView.findViewById(R.id.fingerprint_enable_checkbox);
-
+        themeModeSwitch = rootView.findViewById(R.id.switch_theme);
 
         // TODO: get the shared preferences values
         String sharedPreferencesEmail = prefsManager.getString("email", "");
         showFingerPrint.setChecked(prefsManager.getBoolean("isFingerPrintAllowed", false));
+        isNightMode = prefsManager.getBoolean("nightMode", true);
+
+        //TODO: set the theme mode
+        if(isNightMode) {
+            themeModeSwitch.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        themeModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // update the theme mode in shared preferences
+                prefsManager.saveBoolean("nightMode", isChecked);
+                if(isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }else{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
 
         // TODO: get the data from the database and display it on the screen
         if(!sharedPreferencesEmail.isEmpty()){

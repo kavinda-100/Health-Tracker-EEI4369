@@ -7,8 +7,46 @@
 
     <style name="Theme.HeathTrakerApp" parent="Base.Theme.HeathTrakerApp" />
 
-<!--    <style name="SlideActivityAnimation" parent="@android:style/Animation.Activity">-->
-<!--        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>-->
-<!--        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
-<!--    </style>-->
+<!-- lite mode-->
+    <style name="screenBackground" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:background">@color/background</item>
+    </style>
+    <style name="cardBackground" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:background">@color/card_background</item>
+    </style>
+    <style name="primary_text" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+    <style name="secondary_text" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:textColor">@color/lite_text_color</item>
+    </style>
+    <style name="hint_text" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:textColorHint">@color/lite_text_color</item>
+    </style>
+    <style name="input_background" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:background">@drawable/input_background</item>
+    </style>
+    <style name="input_hint_and_text_and_bg" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColorHint">@color/lite_text_color</item>
+        <item name="android:background">@drawable/input_background</item>
+    </style>
+    <style name="icon_tint" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:tint">@color/black</item>
+    </style>
+    <style name="floating_button_ade" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:tint">#FA0303</item>
+    </style>
+    <style name="add_img_btn" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawableTint">@color/black</item>
+        <item name="android:background">@drawable/input_background</item>
+    </style>
+    <style name="secondary_bg" parent="Base.Theme.HeathTrakerApp">
+        <item name="android:background">@drawable/input_background</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+
 </resources>

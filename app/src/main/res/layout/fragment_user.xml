@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    style="@style/screenBackground"
     android:layout_marginBottom="90dp"
     tools:context=".UserFragment">
 
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profile_heding"
-        android:textColor="@color/black"
+        style="@style/primary_text"
         android:textStyle="bold"
         android:textSize="24sp"
         android:layout_centerHorizontal="true"
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/welcome_greet"
-                    android:textColor="@color/black"
+                    style="@style/primary_text"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginTop="20dp"
@@ -86,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kavinda@gamil.com"
-                    android:textColor="@color/lite_text_color"
+                    style="@style/secondary_text"
                     android:textSize="14sp"
                     android:textStyle="normal"
                     android:layout_marginTop="5dp"
@@ -100,11 +100,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="10dp"
-                    android:textColor="@color/black"
                     android:hint="@string/user_name_text"
-                    android:textColorHint="@color/lite_text_color"
+                    style="@style/input_hint_and_text_and_bg"
+                    android:textSize="18sp"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/input_background"
                     android:autofillHints="emailAddress"
                     android:inputType="text" />
 
@@ -114,11 +113,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="10dp"
-                    android:textColor="@color/black"
                     android:hint="@string/email_text"
-                    android:textColorHint="@color/lite_text_color"
+                    style="@style/input_hint_and_text_and_bg"
+                    android:textSize="18sp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/input_background"
                     android:autofillHints="emailAddress"
                     android:inputType="textEmailAddress" />
 
@@ -128,11 +126,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="10dp"
-                    android:textColor="@color/black"
                     android:hint="@string/password_text"
-                    android:textColorHint="@color/lite_text_color"
+                    style="@style/input_hint_and_text_and_bg"
+                    android:textSize="18sp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/input_background"
                     android:autofillHints="emailAddress"
                     android:inputType="textPassword" />
 
@@ -142,11 +139,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="10dp"
-                    android:textColor="@color/black"
                     android:hint="@string/confirm_password_text"
-                    android:textColorHint="@color/lite_text_color"
+                    style="@style/input_hint_and_text_and_bg"
+                    android:textSize="18sp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/input_background"
                     android:autofillHints="emailAddress"
                     android:inputType="textPassword" />
 
@@ -157,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/enable_fingerprint_text"
-                    android:textColor="@color/black"
+                    style="@style/primary_text"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     />
@@ -215,6 +211,16 @@
                         android:background="@drawable/button_background_worning"/>
 
                 </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_theme"
+                    android:layout_below="@+id/user_button_area_for_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/mode_thumb"
+                    app:track="@drawable/mode_track"
+                    android:layout_marginTop="20dp"
+                    />
             </RelativeLayout>
 
         </RelativeLayout>

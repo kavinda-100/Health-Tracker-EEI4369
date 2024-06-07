@@ -70,7 +70,8 @@ public class ListFragment extends Fragment implements MedicationListRecyclerView
     public void getMedicationListData() {
         Cursor cursor = dataBaseHelper.getAllMedications();
         if(cursor.getCount() == 0) {
-            Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show();
+            medicationListRecyclerView.setVisibility(View.GONE);
 //            showMessage.show("Message", "No data found", requireContext());
         } else {
             while(cursor.moveToNext()) {

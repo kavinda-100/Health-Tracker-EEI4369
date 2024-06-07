@@ -11,6 +11,7 @@
         app:cardCornerRadius="15dp"
         android:elevation="5dp"
         android:layout_marginTop="10dp"
+        style="@style/screenBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,7 @@
                     android:textStyle="bold"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
-                    android:textColor="@color/black"
+                    style="@style/primary_text"
                     />
                 <TextView
                     android:id="@+id/medication_name_text_list"
@@ -46,7 +47,7 @@
                     android:textStyle="bold"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
-                    android:textColor="@color/lite_text_color"
+                    style="@style/secondary_text"
                     android:layout_marginStart="10dp"
                     />
             </LinearLayout>
@@ -65,7 +66,7 @@
                     android:textStyle="bold"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
-                    android:textColor="@color/black"
+                    style="@style/primary_text"
                     />
                 <TextView
                     android:id="@+id/medication_dosage_text_list"
@@ -75,7 +76,7 @@
                     android:textStyle="bold"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
-                    android:textColor="@color/lite_text_color"
+                    style="@style/secondary_text"
                     android:layout_marginStart="10dp"
                     />
             </LinearLayout>
@@ -100,7 +101,7 @@
                         android:textStyle="bold"
                         android:textAlignment="textStart"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
+                        style="@style/primary_text"
                         />
                     <TextView
                         android:id="@+id/medication_time_text_list"
@@ -110,7 +111,7 @@
                         android:textStyle="bold"
                         android:textAlignment="textStart"
                         android:textSize="16sp"
-                        android:textColor="@color/lite_text_color"
+                        style="@style/secondary_text"
                         android:layout_marginStart="10dp"
                         />
                 </LinearLayout>
@@ -128,7 +129,7 @@
                         android:textStyle="bold"
                         android:textAlignment="textStart"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
+                        style="@style/primary_text"
                         />
                     <TextView
                         android:id="@+id/medication_frequency_text_list"
@@ -138,7 +139,7 @@
                         android:textStyle="bold"
                         android:textAlignment="textStart"
                         android:textSize="16sp"
-                        android:textColor="@color/lite_text_color"
+                        style="@style/secondary_text"
                         android:layout_marginStart="10dp"
                         />
                 </LinearLayout>
@@ -150,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/see_details_text"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textAlignment="textStart"

@@ -91,6 +91,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
                     // go to the email verify activity
                     Intent intent = new Intent(EmailVerifyActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 else{
                     showMessage.show("Error", "Invalid OPT", EmailVerifyActivity.this);

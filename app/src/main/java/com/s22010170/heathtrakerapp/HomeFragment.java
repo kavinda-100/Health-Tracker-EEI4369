@@ -103,8 +103,8 @@ public class HomeFragment extends Fragment implements MedicationListRecyclerView
     public void getMedicationListData() {
         Cursor cursor = dataBaseHelper.getAllMedications();
         if(cursor.getCount() == 0) {
-            Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show();
-//            showMessage.show("Message", "No data found", requireContext());
+//            Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show();
+            medicationHomeRecyclerView.setVisibility(View.GONE);
         } else {
             while(cursor.moveToNext()) {
                 int medicationId = cursor.getInt(0);

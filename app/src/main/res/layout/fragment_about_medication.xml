@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    style="@style/screenBackground"
     android:layout_marginBottom="90dp"
     tools:context=".AboutMedicationFragment">
 
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_of_medicine"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -74,7 +74,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="20dp"
                 android:text="@string/paracetamol"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -99,7 +99,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="20dp"
                 android:text="@string/paracetamol_description"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dosage"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -124,7 +124,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="20dp"
                 android:text="@string/paracetamol_dosage"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/image"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -158,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_of_taking"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -170,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12:00:a.m"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -182,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_of_frequency"
-                android:textColor="@color/black"
+                style="@style/primary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -194,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/every_6_hours"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:paddingHorizontal="20dp"
@@ -262,5 +262,6 @@
         app:fabSize="auto"
         app:srcCompat="@drawable/baseline_video_library_24"
         app:tint="@color/primary"/>
+
 
 </RelativeLayout>

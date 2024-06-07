@@ -28,6 +28,7 @@ public class AboutMedicationFragment extends Fragment {
     TextView medicationName, medicationDosage, medicationDescription, medicationTime, medicationFrequency;
     ImageView medicationImage;
     byte[] medicationImageByteArray;
+    int medicationId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class AboutMedicationFragment extends Fragment {
 
         // Get the medication id from the arguments
         Bundle args = getArguments();
-        int medicationId = -1; // Default value
+        medicationId = -1; // Default value
 
         if (args != null) medicationId = args.getInt("medicationId", -1);
         if(medicationId != -1){
@@ -77,6 +78,9 @@ public class AboutMedicationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EditMedicationFragment editMedicationFragment = new EditMedicationFragment();
+                Bundle args = new Bundle();
+                args.putInt("medicationId", medicationId);
+                editMedicationFragment.setArguments(args);
                 requireActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.home_container, editMedicationFragment)
                         .setReorderingAllowed(true)
@@ -95,7 +99,19 @@ public class AboutMedicationFragment extends Fragment {
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // Handle the positive button action (e.g., perform the action)
-                                showMessage.show("Medication Deleted", "The medication has been deleted successfully", requireContext());
+                                if(medicationId != -1){
+                                    boolean isDeleted = dataBaseHelper.deleteMedication(medicationId);
+                                    if(isDeleted) {
+                                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new HomeFragment()).commit();
+                                        showMessage.show("Medication Deleted", "The medication has been deleted successfully", requireContext());
+                                    }
+                                    else{
+                                        showMessage.show("Error", "something went wrong! medication not deleted. please try again!.", requireContext());
+                                    }
+                                }
+                                else{
+                                    showMessage.show("Error", "something went wrong! please try again!.", requireContext());
+                                }
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -123,7 +139,8 @@ public class AboutMedicationFragment extends Fragment {
                 medicationDosage.setText(medicationData.getString(3));
                 medicationImageByteArray = medicationData.getBlob(4);
                 medicationTime.setText(medicationData.getString(5));
-                medicationFrequency.setText(medicationData.getString(6));
+                String frequency = "every" + medicationData.getString(6) + "hours";
+                medicationFrequency.setText(frequency);
             }
             if(medicationImageByteArray != null) {
                 medicationImage.setImageBitmap(DbBitmapUtility.getImage(medicationImageByteArray));

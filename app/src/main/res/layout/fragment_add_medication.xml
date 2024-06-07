@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    style="@style/screenBackground"
     android:layout_marginBottom="90dp"
     tools:context=".AddMedicationFragment">
 
@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/back_text"
+            style="@style/icon_tint"
             android:src="@drawable/baseline_keyboard_backspace_24"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="10dp"
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_medication_heading"
-            android:textColor="@color/black"
+            style="@style/primary_text"
             android:textStyle="bold"
             android:textSize="24sp"
             android:layout_marginTop="20dp"
@@ -58,11 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:padding="10dp"
-                android:textColor="@color/black"
+                style="@style/input_hint_and_text_and_bg"
+                android:textSize="18sp"
                 android:hint="@string/medication_name_hint"
-                android:textColorHint="@color/lite_text_color"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/input_background"
                 android:autofillHints="emailAddress"
                 android:inputType="text" />
 
@@ -73,11 +73,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:padding="10dp"
-                android:textColor="@color/black"
+                style="@style/input_hint_and_text_and_bg"
+                android:textSize="18sp"
                 android:hint="@string/medication_description_hint"
-                android:textColorHint="@color/lite_text_color"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/input_background"
                 android:autofillHints="text"
                 android:inputType="text" />
 
@@ -88,11 +87,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:padding="10dp"
-                android:textColor="@color/black"
+                style="@style/input_hint_and_text_and_bg"
+                android:textSize="18sp"
                 android:hint="@string/medication_dosage_hint"
-                android:textColorHint="@color/lite_text_color"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/input_background"
                 android:autofillHints="text"
                 android:inputType="number" />
 
@@ -107,11 +105,9 @@
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="25dp"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
+                style="@style/add_img_btn"
                 android:drawableStart="@drawable/baseline_upload_24"
-                android:drawableTint="@color/black"
-                android:drawablePadding="5dp"
-                android:background="@drawable/button_background_secondary"/>
+                android:drawablePadding="5dp"/>
 
             <TextView
                 android:id="@+id/add_medication_picture_overview"
@@ -120,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/image_overview"
                 android:textSize="14sp"
-                android:textColor="@color/lite_text_color"
+                style="@style/secondary_text"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:visibility="gone"
@@ -159,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/set_a_notification_remainder"
-                    android:textColor="@color/black"
+                    style="@style/primary_text"
                     android:textSize="16sp"
                     android:layout_marginStart="20dp"
                     />
@@ -185,9 +181,8 @@
                     android:id="@+id/add_medication_frequency_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_background"
                     android:text="@string/add_time"
-                    android:textColor="@color/lite_text_color"
+                    style="@style/secondary_bg"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:paddingVertical="15dp"
@@ -220,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_12_00_a_m"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        style="@style/primary_text"
                         android:textSize="16sp"
                         />
                     <ImageView
@@ -229,6 +224,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/baseline_delete_24"
                         android:layout_marginStart="40dp"
+                        style="@style/icon_tint"
                         android:contentDescription="@string/image"
                         app:tint="@color/black" />
 
@@ -247,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/after"
                         android:textSize="16sp"
-                        android:textColor="@color/lite_text_color"
+                        style="@style/secondary_text"
                         android:textStyle="bold"
                         />
                     <EditText
@@ -256,10 +252,10 @@
                         android:layout_height="40dp"
                         android:padding="10dp"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/black"
+                        style="@style/input_hint_and_text_and_bg"
+                        android:textSize="18sp"
                         android:hint="@string/_6"
                         android:textColorHint="@color/lite_text_color"
-                        android:background="@drawable/input_background"
                         android:autofillHints="phone"
                         android:inputType="number" />
 
@@ -268,7 +264,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/hours"
                         android:textSize="16sp"
-                        android:textColor="@color/lite_text_color"
+                        style="@style/secondary_text"
                         android:textStyle="bold"
                         android:layout_marginStart="10dp"
                         />
@@ -302,8 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel_text"
-                    android:textColor="@color/black"
-                    android:background="@drawable/button_background_primary"
+                    style="@style/secondary_bg"
                     android:paddingVertical="10dp"
                     android:paddingHorizontal="25dp"
                     android:layout_marginStart="20dp"

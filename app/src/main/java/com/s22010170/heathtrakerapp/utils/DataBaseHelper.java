@@ -157,4 +157,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + MEDICATION_TABLE_NAME + " WHERE ID = " + id, null);
     }
+
+    // update medication
+    public boolean updateMedication(int id, String medicationName, String description, String dosage, byte[] medicationImage, String notificationTime, String notificationRepeatTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(medication_COL_2, medicationName);
+        contentValues.put(medication_COL_3, description);
+        contentValues.put(medication_COL_4, dosage);
+        contentValues.put(medication_COL_5, medicationImage);
+        contentValues.put(medication_COL_6, notificationTime);
+        contentValues.put(medication_COL_7, notificationRepeatTime);
+
+        long result = db.update(MEDICATION_TABLE_NAME, contentValues, "ID = ?", new String[]{String.valueOf(id)});
+
+        return result != -1;
+    }
+
+    // delete one medication
+    public boolean deleteMedication(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(MEDICATION_TABLE_NAME, "ID = ?", new String[]{String.valueOf(id)});
+
+        return result != -1;
+    }
+
+    // delete all medications
+    public boolean deleteAllMedications() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(MEDICATION_TABLE_NAME, null, null);
+
+        return result != -1;
+    }
 }
