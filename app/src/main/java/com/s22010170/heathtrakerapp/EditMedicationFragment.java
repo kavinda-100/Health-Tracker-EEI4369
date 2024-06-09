@@ -42,6 +42,14 @@ import java.io.InputStream;
 import java.util.Calendar;
 
 public class EditMedicationFragment extends Fragment {
+    EditText medicationName, medicationDescription, medicationDosage, medicationRepeatTime;
+    Button editMedicationButton, cancelMedicationButton, addMedicationImageButton;
+    SwitchCompat medicationNotificationSwitch;
+    ImageView medicationDeleteImage, medicationImagePreview;
+    TextView medicationTime, imageOverviewText;
+    RelativeLayout addMedicationArea;
+    LinearLayout medicationTimeSetupButton;
+    boolean isUserSetTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +57,39 @@ public class EditMedicationFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_edit_medication, container, false);
 
+        medicationName = rootView.findViewById(R.id.edit_medication_name);
+        medicationDescription = rootView.findViewById(R.id.edit_medication_description);
+        medicationDosage = rootView.findViewById(R.id.edit_medication_dosage);
+        addMedicationImageButton = rootView.findViewById(R.id.edit_medication_picture_button);
+        medicationImagePreview = rootView.findViewById(R.id.edit_medication_picture_preview);
+        imageOverviewText = rootView.findViewById(R.id.edit_medication_picture_overview);
+        medicationNotificationSwitch = rootView.findViewById(R.id.edit_notification_switch);
+        addMedicationArea = rootView.findViewById(R.id.edit_medication_frequency_area);
+        medicationTimeSetupButton = rootView.findViewById(R.id.edit_medication_frequency_button);
+        medicationTime = rootView.findViewById(R.id.edit_medication_frequency_time);
+        medicationDeleteImage = rootView.findViewById(R.id.edit_delete_time);
+        medicationRepeatTime = rootView.findViewById(R.id.edit_medication_hours);
+        editMedicationButton = rootView.findViewById(R.id.edit_medication_button);
+        cancelMedicationButton = rootView.findViewById(R.id.edit_cancel_medication_button);
+
+        //TODO: add switch listener
+        medicationNotificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked){
+                addMedicationArea.setVisibility(View.VISIBLE);
+            } else {
+                addMedicationArea.setVisibility(View.GONE);
+            }
+        });
+
+
+        // cancel medication
+        cancelMedicationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // go back to medication list
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new ListFragment()).commit();
+            }
+        });
 
         return rootView;
     }
