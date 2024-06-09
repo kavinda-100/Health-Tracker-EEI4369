@@ -191,9 +191,11 @@ public class EditMedicationFragment extends Fragment {
                 if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     setAlarm();
                     updateMedication(medicationId, name, description, dosage, medicationImage, time, repeatTime);
+                    goTOListFragment();
                 }
                 else{
                     updateMedication(medicationId, name, description, dosage, medicationImage, "", "");
+                    goTOListFragment();
                 }
             }
         });
@@ -291,5 +293,15 @@ public class EditMedicationFragment extends Fragment {
         } else {
             showMessage.show("Error", "Something went wrong! medication not updated. please try again!.", requireContext());
         }
+    }
+    private  void goTOListFragment(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // go back to medication list
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new ListFragment()).commit();
+            }
+        }, 2000);
     }
 }
