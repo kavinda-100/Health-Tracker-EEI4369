@@ -191,6 +191,7 @@ public class EditMedicationFragment extends Fragment {
                 if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     setAlarm();
                     updateMedication(medicationId, name, description, dosage, medicationImage, time, repeatTime);
+                    updateNotification(medicationId, name, dosage, time, repeatTime);
                     goTOListFragment();
                 }
                 else{
@@ -300,6 +301,14 @@ public class EditMedicationFragment extends Fragment {
             showMessage.show("Error", "Something went wrong! medication not updated. please try again!.", requireContext());
         }
     }
+
+    private void updateNotification(int id, String medicationName, String dosage, String notificationTime, String notificationRepeatTime){
+        boolean isUpdated = medicationDataBaseHelper.updateNotification(id, medicationName, dosage, notificationTime, notificationRepeatTime);
+        if (!isUpdated){
+            showMessage.show("Error", "Something went wrong! notification not updated. please try again!.", requireContext());
+        }
+    }
+
     private  void goTOListFragment(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

@@ -270,7 +270,8 @@ public class UserFragment extends Fragment {
                                 // delete the user account
                                 boolean isDeleted = authDataBaseHelper.deleteAccount(sharedPreferencesEmail);
                                 boolean isAllMedicationDeleted = authDataBaseHelper.deleteAllMedications();
-                                if(isDeleted && isAllMedicationDeleted){
+                                boolean isAllNotificationDeleted = authDataBaseHelper.deleteAllNotifications();
+                                if(isDeleted && isAllMedicationDeleted && isAllNotificationDeleted){
                                     showMessage.show("Success", "User account deleted successfully.", getActivity());
                                     // clear the shared preferences
                                     prefsManager.clearPreferences();

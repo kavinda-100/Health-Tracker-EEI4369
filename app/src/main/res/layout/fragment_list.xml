@@ -38,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/search_for_medication"
-            android:background="@drawable/input_background"
             android:padding="10dp"
             android:autofillHints="text"
             style="@style/input_hint_and_text_and_bg"

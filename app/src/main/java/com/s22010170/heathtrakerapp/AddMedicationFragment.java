@@ -38,7 +38,10 @@ import com.s22010170.heathtrakerapp.utils.SharedPrefsManager;
 import com.s22010170.heathtrakerapp.utils.ShowMessage;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AddMedicationFragment extends Fragment {
     private MaterialTimePicker timePicker;
@@ -170,6 +173,7 @@ public class AddMedicationFragment extends Fragment {
                 if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     setAlarm();
                     InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
+                    InsertNotification(name, dosage, time, repeatTime);
                     goTOListFragment();
                 }
                 else{
@@ -247,6 +251,12 @@ public class AddMedicationFragment extends Fragment {
             showMessage.show("Success", "Medication added successfully", getActivity());
         } else {
             showMessage.show("Error", "Failed to add medication", getActivity());
+        }
+    }
+    private void InsertNotification(String medicationName, String dosage, String notificationTime, String notificationRepeatTime){
+        boolean isInserted = medicationDataBaseHelper.insertNotification(medicationName, dosage, notificationTime, notificationRepeatTime);
+        if (!isInserted){
+            showMessage.show("Error", "Failed to add notification", getActivity());
         }
     }
 
