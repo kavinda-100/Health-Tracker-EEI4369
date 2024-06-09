@@ -224,9 +224,8 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/baseline_delete_24"
                         android:layout_marginStart="40dp"
-                        style="@style/icon_tint"
                         android:contentDescription="@string/image"
-                        app:tint="@color/black" />
+                        style="@style/icon_tint" />
 
                 </LinearLayout>
 

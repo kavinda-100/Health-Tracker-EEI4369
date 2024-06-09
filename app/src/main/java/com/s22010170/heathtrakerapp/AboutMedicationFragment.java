@@ -148,7 +148,7 @@ public class AboutMedicationFragment extends Fragment {
                 medicationDosage.setText(medicationData.getString(3));
                 medicationImageByteArray = medicationData.getBlob(4);
                 medicationTime.setText(medicationData.getString(5));
-                String frequency = "every" + medicationData.getString(6) + "hours";
+                String frequency = "every " + medicationData.getString(6) + " hours";
                 medicationFrequency.setText(frequency);
             }
             if(medicationImageByteArray != null) {

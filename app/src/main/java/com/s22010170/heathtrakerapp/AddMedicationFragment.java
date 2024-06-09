@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -169,9 +170,11 @@ public class AddMedicationFragment extends Fragment {
                 if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     setAlarm();
                     InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
+                    goTOListFragment();
                 }
                 else{
                     InsertMedication(name, description, dosage, medicationImage, "", "");
+                    goTOListFragment();
                 }
             }
         });
@@ -246,7 +249,17 @@ public class AddMedicationFragment extends Fragment {
             showMessage.show("Error", "Failed to add medication", getActivity());
         }
     }
-    
+
+    private  void goTOListFragment(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // go back to medication list
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new ListFragment()).commit();
+            }
+        }, 2000);
+    }
     
 
 }

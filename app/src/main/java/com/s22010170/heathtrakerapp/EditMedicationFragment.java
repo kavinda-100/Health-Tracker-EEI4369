@@ -273,14 +273,20 @@ public class EditMedicationFragment extends Fragment {
                 medicationDosage.setText(medicationData.getString(3));
                 medicationImage = medicationData.getBlob(4);
                 medicationTime.setText(medicationData.getString(5));
-                String frequency = "every " + medicationData.getString(6) + " hours";
-                medicationRepeatTime.setText(frequency);
+                medicationRepeatTime.setText(medicationData.getString(6));
             }
             if (medicationImage != null){
                 Bitmap bitmap = DbBitmapUtility.getImage(medicationImage);
                 medicationImagePreview.setImageBitmap(bitmap);
                 medicationImagePreview.setVisibility(View.VISIBLE);
                 imageOverviewText.setVisibility(View.VISIBLE);
+            }
+            if(medicationTime.getText().length() == 0 && medicationRepeatTime.getText().length() == 0){
+                medicationNotificationSwitch.setChecked(false);
+                addMedicationArea.setVisibility(View.GONE);
+            } else {
+                medicationNotificationSwitch.setChecked(true);
+                addMedicationArea.setVisibility(View.VISIBLE);
             }
         }
     }
