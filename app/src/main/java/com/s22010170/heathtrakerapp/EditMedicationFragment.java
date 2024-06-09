@@ -58,6 +58,7 @@ public class EditMedicationFragment extends Fragment {
     LinearLayout medicationTimeSetupButton;
     byte[] medicationImage;
     boolean isUserSetTime;
+    int medicationId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,9 +88,13 @@ public class EditMedicationFragment extends Fragment {
         editMedicationButton = rootView.findViewById(R.id.edit_medication_button);
         cancelMedicationButton = rootView.findViewById(R.id.edit_cancel_medication_button);
 
-        int medicationItemID = prefsManager.getInt("medicationId", 0);
-        if(medicationItemID != 0){
-            getMedicationDataByID(medicationItemID);
+        // Get the medication id from the arguments
+        Bundle args = getArguments();
+        medicationId = -1; // Default value
+
+        if (args != null) medicationId = args.getInt("medicationId", -1);
+        if(medicationId != -1){
+            getMedicationDataByID(medicationId);
         } else {
             showMessage.show("Error", "No medication found please try again!.", requireContext());
             Handler handler = new Handler();
@@ -185,10 +190,10 @@ public class EditMedicationFragment extends Fragment {
                 }
                 if (medicationNotificationSwitch.isChecked() && !isUserSetTime){
                     setAlarm();
-                    updateMedication(medicationItemID, name, description, dosage, medicationImage, time, repeatTime);
+                    updateMedication(medicationId, name, description, dosage, medicationImage, time, repeatTime);
                 }
                 else{
-                    updateMedication(medicationItemID, name, description, dosage, medicationImage, "", "");
+                    updateMedication(medicationId, name, description, dosage, medicationImage, "", "");
                 }
             }
         });

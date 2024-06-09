@@ -91,7 +91,8 @@ public class HomeFragment extends Fragment implements MedicationListRecyclerView
         //TODO: populate the medicationList Array with medication list data
         getMedicationListData();
         //TODO: NOTE- set the recycler view adapter after getMedicationListData() method called
-        MedicationListRecyclerviewAdapter medicationListRecyclerviewAdapter = new MedicationListRecyclerviewAdapter(requireContext(), medicationList, false, this);
+        MedicationListRecyclerviewAdapter medicationListRecyclerviewAdapter = new MedicationListRecyclerviewAdapter(requireContext(),
+                medicationList, true, this);
         medicationHomeRecyclerView.setAdapter(medicationListRecyclerviewAdapter);
         medicationHomeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
