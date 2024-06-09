@@ -188,7 +188,7 @@ public class EditMedicationFragment extends Fragment {
                     showMessage.show("Error", "Please fill all the fields", getActivity());
                     return;
                 }
-                if (medicationNotificationSwitch.isChecked() && !isUserSetTime){
+                if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     setAlarm();
                     updateMedication(medicationId, name, description, dosage, medicationImage, time, repeatTime);
                 }
