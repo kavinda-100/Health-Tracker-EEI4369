@@ -87,6 +87,7 @@ public class PasswordResetVerifyActivity extends AppCompatActivity {
                     // go to the email verify activity
                     Intent intent = new Intent(PasswordResetVerifyActivity.this, SignInActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 else{
                     showMessage.show("Error", "Invalid OPT", PasswordResetVerifyActivity.this);

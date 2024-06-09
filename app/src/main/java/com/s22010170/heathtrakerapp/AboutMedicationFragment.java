@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,14 @@ public class AboutMedicationFragment extends Fragment {
         }
         else{
             showMessage.show("Error", "No medication found", requireContext());
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // go back to medication list
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.home_container, new ListFragment()).commit();
+                }
+            }, 2000);
         }
 
         // set on click listener for the floating action button for navigating to the add Educational Resources fragment

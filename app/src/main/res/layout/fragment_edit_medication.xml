@@ -163,7 +163,7 @@
 
             <!-- Frequency/time -->
             <RelativeLayout
-                android:id="@+id/add_medication_frequency_area"
+                android:id="@+id/edit_medication_frequency_area"
                 android:layout_below="@+id/edit_notification_area"
                 android:layout_marginTop="20dp"
                 android:visibility="visible"
@@ -274,7 +274,7 @@
             <!--    add and cancel medication button-->
             <LinearLayout
                 android:id="@+id/edit_medication_button_area"
-                android:layout_below="@+id/add_medication_frequency_area"
+                android:layout_below="@+id/edit_medication_frequency_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"

@@ -99,6 +99,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ResetPasswordActivity.this, PasswordResetVerifyActivity.class);
                                 intent.putExtra("email", email.getText().toString());
                                 startActivity(intent);
+                                finish();
                             }
                         }, 4000); // 4000 milliseconds = 4 seconds
 

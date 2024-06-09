@@ -166,8 +166,7 @@ public class AddMedicationFragment extends Fragment {
                     showMessage.show("Error", "Please fill all the fields", getActivity());
                     return;
                 }
-                // set the alarm
-                if(isUserSetTime && medicationNotificationSwitch.isChecked()){
+                if (medicationNotificationSwitch.isChecked() && isUserSetTime){
                     setAlarm();
                     InsertMedication(name, description, dosage, medicationImage, time, repeatTime);
                 }
